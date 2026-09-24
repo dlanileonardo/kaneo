@@ -1,6 +1,6 @@
 import { useQueries } from "@tanstack/react-query";
-import getTasks from "@/fetchers/task/get-tasks";
 import getProjects from "@/fetchers/project/get-projects";
+import getTasks from "@/fetchers/task/get-tasks";
 import type { ProjectWithTasks } from "@/types/project";
 
 type AgendaTask = {

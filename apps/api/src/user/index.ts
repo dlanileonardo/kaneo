@@ -5,11 +5,11 @@ import {
   errorResponse,
   jsonResponse,
 } from "../openapi";
-import { boundedRequestBody } from "../utils/bounded-request-body";
-import { MAX_AVATAR_BYTES, MAX_AVATAR_REQUEST_BYTES } from "./avatar";
 import getAssignedTasks, {
   MAX_ASSIGNED_TASKS,
 } from "../task/controllers/get-assigned-tasks";
+import { boundedRequestBody } from "../utils/bounded-request-body";
+import { MAX_AVATAR_BYTES, MAX_AVATAR_REQUEST_BYTES } from "./avatar";
 import deleteAvatar from "./controllers/delete-avatar";
 import saveAvatar from "./controllers/save-avatar";
 import {

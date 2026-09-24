@@ -3,6 +3,7 @@ import { CalendarClock, Search, Sun } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import BoardToolbar from "@/components/board/board-toolbar";
+import WorkspaceLayout from "@/components/common/workspace-layout";
 import KanbanBoard from "@/components/kanban-board";
 import ListView from "@/components/list-view";
 import PageTitle from "@/components/page-title";
@@ -10,13 +11,12 @@ import TaskDetailsSheet from "@/components/task/task-details-sheet";
 import { TaskViewProvider } from "@/components/task/task-view-context";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import WorkspaceLayout from "@/components/common/workspace-layout";
-import { useBoardSort } from "@/hooks/use-board-sort";
 import {
   AGENDA_BOARD_ID,
   type AgendaScope,
   useAgendaView,
 } from "@/hooks/use-agenda-view";
+import { useBoardSort } from "@/hooks/use-board-sort";
 import { useTaskFiltersWithLabelsSupport } from "@/hooks/use-task-filters-with-labels-support";
 import { WorkspacePermissionScope } from "@/hooks/use-workspace-permission";
 import { type SortConfig, sortTasks } from "@/lib/sort-tasks";
@@ -122,8 +122,15 @@ function RouteComponent() {
   const [scope, setScope] = useState<AgendaScope>("today");
   const [searchQuery, setSearchQuery] = useState("");
   const { sort, setSort } = useBoardSort(AGENDA_BOARD_ID, DEFAULT_SORT);
-  const { board, projects, labels, taskView, getProjectSlug, isLoading, sheet } =
-    useAgendaView({ workspaceId, scope, taskId });
+  const {
+    board,
+    projects,
+    labels,
+    taskView,
+    getProjectSlug,
+    isLoading,
+    sheet,
+  } = useAgendaView({ workspaceId, scope, taskId });
 
   const {
     filters,
@@ -160,10 +167,7 @@ function RouteComponent() {
 
   return (
     <>
-      <PageTitle
-        title={t("navigation:sidebar.agenda")}
-        hideAppName
-      />
+      <PageTitle title={t("navigation:sidebar.agenda")} hideAppName />
       <WorkspaceLayout
         title={t("navigation:sidebar.agenda")}
         headerActions={

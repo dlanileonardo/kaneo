@@ -20,7 +20,12 @@ type AgendaProject = {
   name: string;
   icon: string | null;
   workspaceId: string;
-  columns: Array<{ slug: string; name: string; icon: string | null; isFinal: boolean }>;
+  columns: Array<{
+    slug: string;
+    name: string;
+    icon: string | null;
+    isFinal: boolean;
+  }>;
 };
 
 type MergedColumn = ProjectWithTasks["columns"][number] & {
@@ -28,7 +33,10 @@ type MergedColumn = ProjectWithTasks["columns"][number] & {
 };
 
 export function buildAgendaBoard(
-  entries: Array<{ task: Task; project: { id: string; name: string; icon: string | null } }>,
+  entries: Array<{
+    task: Task;
+    project: { id: string; name: string; icon: string | null };
+  }>,
   scope: AgendaScope,
   projects: AgendaProject[],
 ): ProjectWithTasks | null {
@@ -63,10 +71,7 @@ export function buildAgendaBoard(
     const due = new Date(task.dueDate);
     if (Number.isNaN(due.getTime())) continue;
 
-    const inScope =
-      scope === "today"
-        ? isToday(due) || isPast(due)
-        : due > now;
+    const inScope = scope === "today" ? isToday(due) || isPast(due) : due > now;
 
     if (!inScope) continue;
     if (!projectById.has(task.projectId)) continue;
@@ -78,7 +83,9 @@ export function buildAgendaBoard(
   }
 
   const columns = [...columnsBySlug.values()]
-    .sort((a, b) => a.minPosition - b.minPosition || a.slug.localeCompare(b.slug))
+    .sort(
+      (a, b) => a.minPosition - b.minPosition || a.slug.localeCompare(b.slug),
+    )
     .map(({ minPosition: _position, ...column }) => column);
 
   return {
@@ -128,13 +135,14 @@ export function useAgendaView({
   const taskView = useMemo<TaskViewContextValue>(
     () => ({
       getTaskProject: (task) =>
-        toProjectRef(
-          projects.find((project) => project.id === task.projectId),
-        ),
+        toProjectRef(projects.find((project) => project.id === task.projectId)),
       getTaskProjectById: (id) =>
         toProjectRef(
           projects.find((project) =>
-            tasks.some((entry) => entry.task.id === id && entry.project.id === project.id),
+            tasks.some(
+              (entry) =>
+                entry.task.id === id && entry.project.id === project.id,
+            ),
           ),
         ),
       capabilities: {
@@ -159,7 +167,9 @@ export function useAgendaView({
   const sheetProject = useMemo(() => {
     if (!taskId) return undefined;
     return projects.find((project) =>
-      tasks.some((entry) => entry.task.id === taskId && entry.project.id === project.id),
+      tasks.some(
+        (entry) => entry.task.id === taskId && entry.project.id === project.id,
+      ),
     );
   }, [tasks, projects, taskId]);
 

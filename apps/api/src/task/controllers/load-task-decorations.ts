@@ -21,8 +21,15 @@ export type TaskExternalLinkDecoration = {
  * Labels and external links for a set of tasks, fetched with one query each and
  * grouped by task id, so list endpoints stay at a fixed number of round-trips
  * regardless of how many tasks they return.
+ *
+ * `limit`/`offset` page the related rows per task page (the board's
+ * `relatedPage` contract); when omitted every label and link is returned, as
+ * the assigned-tasks endpoint expects.
  */
-export async function loadTaskDecorations(taskIds: string[]) {
+export async function loadTaskDecorations(
+  taskIds: string[],
+  options: { limit?: number; offset?: number } = {},
+) {
   const labelsByTask = new Map<string, TaskLabelDecoration[]>();
   const externalLinksByTask = new Map<string, TaskExternalLinkDecoration[]>();
 
@@ -30,20 +37,30 @@ export async function loadTaskDecorations(taskIds: string[]) {
     return { labelsByTask, externalLinksByTask };
   }
 
+  const limit = options.limit;
+  const offset = options.offset ?? 0;
+
+  const labelQuery = db
+    .select({
+      id: labelTable.id,
+      name: labelTable.name,
+      color: labelTable.color,
+      taskId: labelTable.taskId,
+    })
+    .from(labelTable)
+    .where(inArray(labelTable.taskId, taskIds))
+    .orderBy(labelTable.id);
+  const externalLinkQuery = db
+    .select()
+    .from(externalLinkTable)
+    .where(inArray(externalLinkTable.taskId, taskIds))
+    .orderBy(externalLinkTable.id);
+
   const [labelsData, externalLinksData] = await Promise.all([
-    db
-      .select({
-        id: labelTable.id,
-        name: labelTable.name,
-        color: labelTable.color,
-        taskId: labelTable.taskId,
-      })
-      .from(labelTable)
-      .where(inArray(labelTable.taskId, taskIds)),
-    db
-      .select()
-      .from(externalLinkTable)
-      .where(inArray(externalLinkTable.taskId, taskIds)),
+    limit !== undefined ? labelQuery.limit(limit).offset(offset) : labelQuery,
+    limit !== undefined
+      ? externalLinkQuery.limit(limit).offset(offset)
+      : externalLinkQuery,
   ]);
 
   for (const label of labelsData) {
@@ -57,12 +74,22 @@ export async function loadTaskDecorations(taskIds: string[]) {
     const links = externalLinksByTask.get(externalLink.taskId) ?? [];
     links.push({
       ...externalLink,
-      metadata: externalLink.metadata
-        ? JSON.parse(externalLink.metadata)
-        : null,
+      metadata: parseMetadata(externalLink.metadata),
     });
     externalLinksByTask.set(externalLink.taskId, links);
   }
 
   return { labelsByTask, externalLinksByTask };
+}
+
+function parseMetadata(raw: string | null): Record<string, unknown> | null {
+  if (!raw) return null;
+  try {
+    const value: unknown = JSON.parse(raw);
+    return value !== null && typeof value === "object" && !Array.isArray(value)
+      ? (value as Record<string, unknown>)
+      : null;
+  } catch {
+    return null;
+  }
 }

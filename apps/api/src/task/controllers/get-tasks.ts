@@ -19,8 +19,6 @@ import {
   taskTable,
   userTable,
 } from "../../database/schema";
-import { loadTaskDecorations } from "./load-task-decorations";
-
 import { boundedTaskRead, type TaskReadDatabase } from "../bounded-read";
 import {
   boardDescription,
@@ -28,6 +26,7 @@ import {
   descriptionDeferred,
   projectDescriptionDeferred,
 } from "../description-pages";
+import { loadTaskDecorations } from "./load-task-decorations";
 
 export type GetTasksOptions = {
   assigneeId?: string;
@@ -173,8 +172,10 @@ async function getTasksPage(
 
   const taskIds = paginatedTasks.map((task) => task.id);
 
-  const { labelsByTask, externalLinksByTask } =
-    await loadTaskDecorations(taskIds);
+  const { labelsByTask, externalLinksByTask } = await loadTaskDecorations(
+    taskIds,
+    { limit: relatedPageSize, offset: relatedOffset },
+  );
 
   const projectColumns = await db
     .select()
