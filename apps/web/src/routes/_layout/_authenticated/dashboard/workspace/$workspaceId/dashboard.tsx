@@ -87,8 +87,8 @@ function Section({
   accent?: boolean;
 }) {
   return (
-    <section className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
+    <section className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden">
+      <div className="flex shrink-0 items-center gap-2">
         <h2
           className={cn(
             "text-sm font-semibold uppercase tracking-wide",
@@ -204,45 +204,46 @@ function RouteComponent() {
     <>
       <PageTitle title={t("navigation:sidebar.dashboard")} />
       <WorkspaceLayout title={t("navigation:sidebar.dashboard")}>
-        <div
-          className={cn(
-            "mx-auto grid w-full max-w-5xl gap-6 p-4",
-            !isMobile && "grid-cols-2",
-          )}
-        >
-          <Section
-            title={t("tasks:dashboard.today")}
-            count={today.length}
-            accent
-          >
-            {isLoading ? (
-              <TaskListSkeleton />
-            ) : today.length === 0 ? (
-              <EmptyText>{t("tasks:dashboard.noToday")}</EmptyText>
-            ) : (
-              <div className="flex flex-col gap-2">
-                {today.map((entry) => (
-                  <TaskCard
-                    key={entry.task.id}
-                    task={entry.task}
-                    projectName={entry.project.name}
-                    projectIcon={entry.project.icon}
-                    onClick={() =>
-                      handleOpenTask(entry.task.id, entry.project.id)
-                    }
-                  />
-                ))}
-              </div>
+        <div className="flex h-full min-h-0 w-full overflow-hidden">
+          <div
+            className={cn(
+              "flex min-h-0 w-full gap-6 p-4",
+              isMobile ? "flex-col overflow-y-auto" : "flex-row overflow-hidden",
             )}
-          </Section>
+          >
+            <Section
+              title={t("tasks:dashboard.today")}
+              count={today.length}
+              accent
+            >
+              {isLoading ? (
+                <TaskListSkeleton />
+              ) : today.length === 0 ? (
+                <EmptyText>{t("tasks:dashboard.noToday")}</EmptyText>
+              ) : (
+                <div className="flex flex-col gap-2 overflow-y-auto">
+                  {today.map((entry) => (
+                    <TaskCard
+                      key={entry.task.id}
+                      task={entry.task}
+                      projectName={entry.project.name}
+                      projectIcon={entry.project.icon}
+                      onClick={() =>
+                        handleOpenTask(entry.task.id, entry.project.id)
+                      }
+                    />
+                  ))}
+                </div>
+              )}
+            </Section>
 
-          <Section title={t("tasks:dashboard.upcoming")} count={upcoming.length}>
+            <Section title={t("tasks:dashboard.upcoming")} count={upcoming.length}>
             {isLoading ? (
               <TaskListSkeleton />
             ) : upcoming.length === 0 ? (
               <EmptyText>{t("tasks:dashboard.noUpcoming")}</EmptyText>
             ) : (
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 overflow-y-auto">
                 {upcoming.map((entry) => (
                   <TaskCard
                     key={entry.task.id}
@@ -257,6 +258,7 @@ function RouteComponent() {
               </div>
             )}
           </Section>
+          </div>
         </div>
       </WorkspaceLayout>
 
