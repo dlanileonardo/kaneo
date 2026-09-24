@@ -31,6 +31,9 @@ import { Route as InvitationAcceptInviteIdRouteImport } from './routes/invitatio
 import { Route as LayoutAuthenticatedDashboardIndexRouteImport } from './routes/_layout/_authenticated/dashboard/index'
 import { Route as LayoutAuthenticatedDashboardInvitationsRouteImport } from './routes/_layout/_authenticated/dashboard/invitations'
 import { Route as LayoutAuthenticatedDashboardSettingsRouteImport } from './routes/_layout/_authenticated/dashboard/settings'
+import { Route as LayoutAuthenticatedDashboardMyTasksIndexRouteImport } from './routes/_layout/_authenticated/dashboard/my-tasks/index'
+import { Route as LayoutAuthenticatedDashboardMyTasksBoardRouteImport } from './routes/_layout/_authenticated/dashboard/my-tasks/board'
+import { Route as LayoutAuthenticatedDashboardMyTasksCalendarRouteImport } from './routes/_layout/_authenticated/dashboard/my-tasks/calendar'
 import { Route as LayoutAuthenticatedDashboardSettingsAccountRouteImport } from './routes/_layout/_authenticated/dashboard/settings/account'
 import { Route as LayoutAuthenticatedDashboardSettingsAdminRouteImport } from './routes/_layout/_authenticated/dashboard/settings/admin'
 import { Route as LayoutAuthenticatedDashboardSettingsProjectsRouteImport } from './routes/_layout/_authenticated/dashboard/settings/projects'
@@ -175,6 +178,24 @@ const LayoutAuthenticatedDashboardSettingsRoute =
   LayoutAuthenticatedDashboardSettingsRouteImport.update({
     id: '/settings',
     path: '/settings',
+    getParentRoute: () => LayoutAuthenticatedDashboardRoute,
+  } as any)
+const LayoutAuthenticatedDashboardMyTasksIndexRoute =
+  LayoutAuthenticatedDashboardMyTasksIndexRouteImport.update({
+    id: '/my-tasks/',
+    path: '/my-tasks/',
+    getParentRoute: () => LayoutAuthenticatedDashboardRoute,
+  } as any)
+const LayoutAuthenticatedDashboardMyTasksBoardRoute =
+  LayoutAuthenticatedDashboardMyTasksBoardRouteImport.update({
+    id: '/my-tasks/board',
+    path: '/my-tasks/board',
+    getParentRoute: () => LayoutAuthenticatedDashboardRoute,
+  } as any)
+const LayoutAuthenticatedDashboardMyTasksCalendarRoute =
+  LayoutAuthenticatedDashboardMyTasksCalendarRouteImport.update({
+    id: '/my-tasks/calendar',
+    path: '/my-tasks/calendar',
     getParentRoute: () => LayoutAuthenticatedDashboardRoute,
   } as any)
 const LayoutAuthenticatedDashboardSettingsAccountRoute =
@@ -399,12 +420,15 @@ export interface FileRoutesByFullPath {
   '/dashboard/invitations': typeof LayoutAuthenticatedDashboardInvitationsRoute
   '/dashboard/settings': typeof LayoutAuthenticatedDashboardSettingsRouteWithChildren
   '/dashboard/': typeof LayoutAuthenticatedDashboardIndexRoute
+  '/dashboard/my-tasks/board': typeof LayoutAuthenticatedDashboardMyTasksBoardRoute
+  '/dashboard/my-tasks/calendar': typeof LayoutAuthenticatedDashboardMyTasksCalendarRoute
   '/dashboard/settings/account': typeof LayoutAuthenticatedDashboardSettingsAccountRouteWithChildren
   '/dashboard/settings/admin': typeof LayoutAuthenticatedDashboardSettingsAdminRouteWithChildren
   '/dashboard/settings/projects': typeof LayoutAuthenticatedDashboardSettingsProjectsRouteWithChildren
   '/dashboard/settings/workspace': typeof LayoutAuthenticatedDashboardSettingsWorkspaceRouteWithChildren
   '/dashboard/workspace/$workspaceId': typeof LayoutAuthenticatedDashboardWorkspaceWorkspaceIdRouteWithChildren
   '/dashboard/workspace/create': typeof LayoutAuthenticatedDashboardWorkspaceCreateRoute
+  '/dashboard/my-tasks/': typeof LayoutAuthenticatedDashboardMyTasksIndexRoute
   '/dashboard/settings/account/developer': typeof LayoutAuthenticatedDashboardSettingsAccountDeveloperRoute
   '/dashboard/settings/account/information': typeof LayoutAuthenticatedDashboardSettingsAccountInformationRoute
   '/dashboard/settings/account/notifications': typeof LayoutAuthenticatedDashboardSettingsAccountNotificationsRoute
@@ -448,11 +472,14 @@ export interface FileRoutesByTo {
   '/dashboard/invitations': typeof LayoutAuthenticatedDashboardInvitationsRoute
   '/dashboard/settings': typeof LayoutAuthenticatedDashboardSettingsRouteWithChildren
   '/dashboard': typeof LayoutAuthenticatedDashboardIndexRoute
+  '/dashboard/my-tasks/board': typeof LayoutAuthenticatedDashboardMyTasksBoardRoute
+  '/dashboard/my-tasks/calendar': typeof LayoutAuthenticatedDashboardMyTasksCalendarRoute
   '/dashboard/settings/account': typeof LayoutAuthenticatedDashboardSettingsAccountRouteWithChildren
   '/dashboard/settings/admin': typeof LayoutAuthenticatedDashboardSettingsAdminRouteWithChildren
   '/dashboard/settings/projects': typeof LayoutAuthenticatedDashboardSettingsProjectsRouteWithChildren
   '/dashboard/settings/workspace': typeof LayoutAuthenticatedDashboardSettingsWorkspaceRouteWithChildren
   '/dashboard/workspace/create': typeof LayoutAuthenticatedDashboardWorkspaceCreateRoute
+  '/dashboard/my-tasks': typeof LayoutAuthenticatedDashboardMyTasksIndexRoute
   '/dashboard/settings/account/developer': typeof LayoutAuthenticatedDashboardSettingsAccountDeveloperRoute
   '/dashboard/settings/account/information': typeof LayoutAuthenticatedDashboardSettingsAccountInformationRoute
   '/dashboard/settings/account/notifications': typeof LayoutAuthenticatedDashboardSettingsAccountNotificationsRoute
@@ -501,12 +528,15 @@ export interface FileRoutesById {
   '/_layout/_authenticated/dashboard/invitations': typeof LayoutAuthenticatedDashboardInvitationsRoute
   '/_layout/_authenticated/dashboard/settings': typeof LayoutAuthenticatedDashboardSettingsRouteWithChildren
   '/_layout/_authenticated/dashboard/': typeof LayoutAuthenticatedDashboardIndexRoute
+  '/_layout/_authenticated/dashboard/my-tasks/board': typeof LayoutAuthenticatedDashboardMyTasksBoardRoute
+  '/_layout/_authenticated/dashboard/my-tasks/calendar': typeof LayoutAuthenticatedDashboardMyTasksCalendarRoute
   '/_layout/_authenticated/dashboard/settings/account': typeof LayoutAuthenticatedDashboardSettingsAccountRouteWithChildren
   '/_layout/_authenticated/dashboard/settings/admin': typeof LayoutAuthenticatedDashboardSettingsAdminRouteWithChildren
   '/_layout/_authenticated/dashboard/settings/projects': typeof LayoutAuthenticatedDashboardSettingsProjectsRouteWithChildren
   '/_layout/_authenticated/dashboard/settings/workspace': typeof LayoutAuthenticatedDashboardSettingsWorkspaceRouteWithChildren
   '/_layout/_authenticated/dashboard/workspace/$workspaceId': typeof LayoutAuthenticatedDashboardWorkspaceWorkspaceIdRouteWithChildren
   '/_layout/_authenticated/dashboard/workspace/create': typeof LayoutAuthenticatedDashboardWorkspaceCreateRoute
+  '/_layout/_authenticated/dashboard/my-tasks/': typeof LayoutAuthenticatedDashboardMyTasksIndexRoute
   '/_layout/_authenticated/dashboard/settings/account/developer': typeof LayoutAuthenticatedDashboardSettingsAccountDeveloperRoute
   '/_layout/_authenticated/dashboard/settings/account/information': typeof LayoutAuthenticatedDashboardSettingsAccountInformationRoute
   '/_layout/_authenticated/dashboard/settings/account/notifications': typeof LayoutAuthenticatedDashboardSettingsAccountNotificationsRoute
@@ -554,12 +584,15 @@ export interface FileRouteTypes {
     | '/dashboard/invitations'
     | '/dashboard/settings'
     | '/dashboard/'
+    | '/dashboard/my-tasks/board'
+    | '/dashboard/my-tasks/calendar'
     | '/dashboard/settings/account'
     | '/dashboard/settings/admin'
     | '/dashboard/settings/projects'
     | '/dashboard/settings/workspace'
     | '/dashboard/workspace/$workspaceId'
     | '/dashboard/workspace/create'
+    | '/dashboard/my-tasks/'
     | '/dashboard/settings/account/developer'
     | '/dashboard/settings/account/information'
     | '/dashboard/settings/account/notifications'
@@ -603,11 +636,14 @@ export interface FileRouteTypes {
     | '/dashboard/invitations'
     | '/dashboard/settings'
     | '/dashboard'
+    | '/dashboard/my-tasks/board'
+    | '/dashboard/my-tasks/calendar'
     | '/dashboard/settings/account'
     | '/dashboard/settings/admin'
     | '/dashboard/settings/projects'
     | '/dashboard/settings/workspace'
     | '/dashboard/workspace/create'
+    | '/dashboard/my-tasks'
     | '/dashboard/settings/account/developer'
     | '/dashboard/settings/account/information'
     | '/dashboard/settings/account/notifications'
@@ -655,12 +691,15 @@ export interface FileRouteTypes {
     | '/_layout/_authenticated/dashboard/invitations'
     | '/_layout/_authenticated/dashboard/settings'
     | '/_layout/_authenticated/dashboard/'
+    | '/_layout/_authenticated/dashboard/my-tasks/board'
+    | '/_layout/_authenticated/dashboard/my-tasks/calendar'
     | '/_layout/_authenticated/dashboard/settings/account'
     | '/_layout/_authenticated/dashboard/settings/admin'
     | '/_layout/_authenticated/dashboard/settings/projects'
     | '/_layout/_authenticated/dashboard/settings/workspace'
     | '/_layout/_authenticated/dashboard/workspace/$workspaceId'
     | '/_layout/_authenticated/dashboard/workspace/create'
+    | '/_layout/_authenticated/dashboard/my-tasks/'
     | '/_layout/_authenticated/dashboard/settings/account/developer'
     | '/_layout/_authenticated/dashboard/settings/account/information'
     | '/_layout/_authenticated/dashboard/settings/account/notifications'
@@ -851,6 +890,27 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/dashboard/settings'
       preLoaderRoute: typeof LayoutAuthenticatedDashboardSettingsRouteImport
+      parentRoute: typeof LayoutAuthenticatedDashboardRoute
+    }
+    '/_layout/_authenticated/dashboard/my-tasks/': {
+      id: '/_layout/_authenticated/dashboard/my-tasks/'
+      path: '/my-tasks'
+      fullPath: '/dashboard/my-tasks/'
+      preLoaderRoute: typeof LayoutAuthenticatedDashboardMyTasksIndexRouteImport
+      parentRoute: typeof LayoutAuthenticatedDashboardRoute
+    }
+    '/_layout/_authenticated/dashboard/my-tasks/board': {
+      id: '/_layout/_authenticated/dashboard/my-tasks/board'
+      path: '/my-tasks/board'
+      fullPath: '/dashboard/my-tasks/board'
+      preLoaderRoute: typeof LayoutAuthenticatedDashboardMyTasksBoardRouteImport
+      parentRoute: typeof LayoutAuthenticatedDashboardRoute
+    }
+    '/_layout/_authenticated/dashboard/my-tasks/calendar': {
+      id: '/_layout/_authenticated/dashboard/my-tasks/calendar'
+      path: '/my-tasks/calendar'
+      fullPath: '/dashboard/my-tasks/calendar'
+      preLoaderRoute: typeof LayoutAuthenticatedDashboardMyTasksCalendarRouteImport
       parentRoute: typeof LayoutAuthenticatedDashboardRoute
     }
     '/_layout/_authenticated/dashboard/settings/account': {
@@ -1216,8 +1276,11 @@ interface LayoutAuthenticatedDashboardRouteChildren {
   LayoutAuthenticatedDashboardInvitationsRoute: typeof LayoutAuthenticatedDashboardInvitationsRoute
   LayoutAuthenticatedDashboardSettingsRoute: typeof LayoutAuthenticatedDashboardSettingsRouteWithChildren
   LayoutAuthenticatedDashboardIndexRoute: typeof LayoutAuthenticatedDashboardIndexRoute
+  LayoutAuthenticatedDashboardMyTasksBoardRoute: typeof LayoutAuthenticatedDashboardMyTasksBoardRoute
+  LayoutAuthenticatedDashboardMyTasksCalendarRoute: typeof LayoutAuthenticatedDashboardMyTasksCalendarRoute
   LayoutAuthenticatedDashboardWorkspaceWorkspaceIdRoute: typeof LayoutAuthenticatedDashboardWorkspaceWorkspaceIdRouteWithChildren
   LayoutAuthenticatedDashboardWorkspaceCreateRoute: typeof LayoutAuthenticatedDashboardWorkspaceCreateRoute
+  LayoutAuthenticatedDashboardMyTasksIndexRoute: typeof LayoutAuthenticatedDashboardMyTasksIndexRoute
 }
 
 const LayoutAuthenticatedDashboardRouteChildren: LayoutAuthenticatedDashboardRouteChildren =
@@ -1228,10 +1291,16 @@ const LayoutAuthenticatedDashboardRouteChildren: LayoutAuthenticatedDashboardRou
       LayoutAuthenticatedDashboardSettingsRouteWithChildren,
     LayoutAuthenticatedDashboardIndexRoute:
       LayoutAuthenticatedDashboardIndexRoute,
+    LayoutAuthenticatedDashboardMyTasksBoardRoute:
+      LayoutAuthenticatedDashboardMyTasksBoardRoute,
+    LayoutAuthenticatedDashboardMyTasksCalendarRoute:
+      LayoutAuthenticatedDashboardMyTasksCalendarRoute,
     LayoutAuthenticatedDashboardWorkspaceWorkspaceIdRoute:
       LayoutAuthenticatedDashboardWorkspaceWorkspaceIdRouteWithChildren,
     LayoutAuthenticatedDashboardWorkspaceCreateRoute:
       LayoutAuthenticatedDashboardWorkspaceCreateRoute,
+    LayoutAuthenticatedDashboardMyTasksIndexRoute:
+      LayoutAuthenticatedDashboardMyTasksIndexRoute,
   }
 
 const LayoutAuthenticatedDashboardRouteWithChildren =

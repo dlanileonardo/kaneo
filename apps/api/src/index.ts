@@ -51,6 +51,7 @@ import search from "./search";
 import slackIntegration from "./slack-integration";
 import { getPrivateObject } from "./storage/s3";
 import task from "./task";
+import { registerAssignedTasksRealtime } from "./task/assigned-tasks-realtime";
 import {
   getDescriptionPage,
   getPublicProjectDescriptionPage,
@@ -849,6 +850,8 @@ export function createApp() {
   );
 
   app.route("/api", api);
+
+  registerAssignedTasksRealtime();
 
   return {
     app,

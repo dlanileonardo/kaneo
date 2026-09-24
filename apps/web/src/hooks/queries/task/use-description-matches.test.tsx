@@ -82,6 +82,7 @@ describe("deferred description search", () => {
           project,
           "project",
           "needle",
+          undefined,
           matches.ids,
         );
       },

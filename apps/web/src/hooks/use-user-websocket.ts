@@ -1,6 +1,6 @@
 import { windowId } from "@kaneo/libs";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { getApiUrl } from "@/fetchers/get-api-url";
 import { authClient } from "@/lib/auth-client";
 
@@ -13,6 +13,7 @@ export function getUserWsUrl() {
 const MAX_RETRIES = 5;
 const BASE_DELAY = 1000;
 const WS_PING_INTERVAL_MS = 30_000;
+const ASSIGNED_TASKS_DEBOUNCE_MS = 100;
 
 /**
  * Maintains a user-scoped WebSocket connection for receiving user-targeted
@@ -22,6 +23,10 @@ const WS_PING_INTERVAL_MS = 30_000;
 export function useUserWebSocket() {
   const queryClient = useQueryClient();
   const { data: session } = authClient.useSession();
+  const assignedTasksTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+
   useEffect(() => {
     if (!session?.user?.id) return;
 
@@ -31,6 +36,14 @@ export function useUserWebSocket() {
     let retries = 0;
     let retryTimeout: ReturnType<typeof setTimeout> | null = null;
     let pingInterval: ReturnType<typeof setInterval> | null = null;
+
+    function invalidateAssignedTasks() {
+      if (assignedTasksTimeoutRef.current) return;
+      assignedTasksTimeoutRef.current = setTimeout(() => {
+        assignedTasksTimeoutRef.current = null;
+        queryClient.invalidateQueries({ queryKey: ["my-tasks"] });
+      }, ASSIGNED_TASKS_DEBOUNCE_MS);
+    }
 
     function clearPing() {
       if (pingInterval !== null) {
@@ -62,9 +75,17 @@ export function useUserWebSocket() {
         try {
           const message = JSON.parse(event.data as string) as {
             type?: string;
+            taskId?: string;
           };
           if (message.type === "NOTIFICATION_CREATED") {
             queryClient.invalidateQueries({ queryKey: ["notifications"] });
+          } else if (message.type === "ASSIGNED_TASKS_UPDATED") {
+            invalidateAssignedTasks();
+            if (message.taskId) {
+              queryClient.invalidateQueries({
+                queryKey: ["task", message.taskId],
+              });
+            }
           }
         } catch {
           // Ignore malformed messages
@@ -91,6 +112,10 @@ export function useUserWebSocket() {
       clearPing();
       if (retryTimeout !== null) {
         clearTimeout(retryTimeout);
+      }
+      if (assignedTasksTimeoutRef.current) {
+        clearTimeout(assignedTasksTimeoutRef.current);
+        assignedTasksTimeoutRef.current = null;
       }
       activeSocket?.close();
     };

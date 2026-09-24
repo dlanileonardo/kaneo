@@ -34,6 +34,7 @@ async function updateTask(
         description === undefined ? sql<null>`null` : taskTable.description,
       status: taskTable.status,
       projectId: taskTable.projectId,
+      userId: taskTable.userId,
     })
     .from(taskTable)
     .where(eq(taskTable.id, id))
@@ -114,12 +115,16 @@ async function updateTask(
     });
   }
 
+  // A full update can reassign without going through the assignee endpoint,
+  // so both sides of the change travel with the event.
   await publishEvent("task.updated", {
     taskId: updatedTask.id,
     projectId: updatedTask.projectId,
     title: updatedTask.title,
     status: updatedTask.status,
     userId: currentUserId,
+    assigneeId: updatedTask.userId,
+    previousAssigneeId: existingTask.userId,
   });
 
   if (description !== undefined && existingTask.description !== description) {

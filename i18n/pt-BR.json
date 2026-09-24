@@ -1540,6 +1540,7 @@
       "invitations": "Convites",
       "more": "Mais",
       "backToBoard": "Voltar ao quadro",
+      "myTasks": "Minhas tarefas",
       "dashboard": "Dashboard"
     },
     "projectList": {
@@ -2094,12 +2095,14 @@
         "priority": "Prioridade",
         "assignee": "Responsável",
         "dueDate": "Data de vencimento",
-        "labels": "Etiquetas"
+        "labels": "Etiquetas",
+        "project": "Projeto"
       },
       "operators": {
         "isAnyOf": "é qualquer um de",
         "includeAnyOf": "inclui qualquer um de"
       },
+      "allProjects": "Todos os projetos",
       "all": "All",
       "allCustomFieldValues": "All values",
       "noCustomFieldValues": "No custom field values",
@@ -2237,6 +2240,15 @@
       "title": "Calendar",
       "today": "Today",
       "loadError": "Failed to load tasks."
+    },
+    "myTasks": {
+      "empty": "Nada atribuído a você",
+      "emptySubtitle": "As tarefas atribuídas a você em qualquer um dos seus espaços de trabalho aparecerão aqui.",
+      "loadError": "Não foi possível carregar suas tarefas.",
+      "pageTitle": "Minhas tarefas · {{view}}",
+      "title": "Minhas tarefas",
+      "noMatches": "Nenhuma tarefa corresponde",
+      "noMatchesSubtitle": "Tente outra busca ou limpe os filtros ativos."
     },
     "descriptionSearchLoading": "Searching full descriptions…",
     "descriptionSearchError": "Description search failed. Results may be incomplete.",
