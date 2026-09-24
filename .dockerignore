@@ -10,3 +10,4 @@
 .env.*
 !apps/web/.env.production
 *.log
+**/.cache
