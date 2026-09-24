@@ -1538,7 +1538,7 @@
       "more": "और",
       "backToBoard": "बोर्ड पर वापस जाएँ",
       "myTasks": "मेरे कार्य",
-      "dashboard": "Dashboard"
+      "agenda": "एजेंडा"
     },
     "projectList": {
       "viewProject": "प्रोजेक्ट देखें",
@@ -2247,7 +2247,7 @@
     "descriptionRetry": "Retry",
     "descriptionLoading": "Loading description…",
     "descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-    "dashboard": {
+    "agenda": {
       "today": "Today",
       "upcoming": "Upcoming",
       "noToday": "Nothing due today. You are all caught up.",

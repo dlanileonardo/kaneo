@@ -29,9 +29,9 @@ export function NavMain() {
 
   const navItems = [
     {
-      title: t("navigation:sidebar.dashboard"),
-      url: `/dashboard/workspace/${workspace.id}/dashboard`,
-      isActive: window.location.pathname.endsWith("/dashboard"),
+      title: t("navigation:sidebar.agenda"),
+      url: `/dashboard/workspace/${workspace.id}/agenda`,
+      isActive: window.location.pathname.endsWith("/agenda"),
       badge: null,
     },
     {

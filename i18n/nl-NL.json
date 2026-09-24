@@ -1538,7 +1538,7 @@
       "more": "Meer",
       "backToBoard": "Terug naar bord",
       "myTasks": "Mijn taken",
-      "dashboard": "Dashboard"
+      "agenda": "Agenda"
     },
     "projectList": {
       "viewProject": "Project bekijken",
@@ -2247,7 +2247,7 @@
     "descriptionRetry": "Retry",
     "descriptionLoading": "Loading description…",
     "descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-    "dashboard": {
+    "agenda": {
       "today": "Today",
       "upcoming": "Upcoming",
       "noToday": "Nothing due today. You are all caught up.",

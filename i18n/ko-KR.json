@@ -1535,7 +1535,7 @@
       "more": "더 보기",
       "backToBoard": "보드로 돌아가기",
       "myTasks": "내 작업",
-      "dashboard": "Dashboard"
+      "agenda": "일정"
     },
     "projectList": {
       "viewProject": "프로젝트 보기",
@@ -2239,7 +2239,7 @@
     "descriptionRetry": "Retry",
     "descriptionLoading": "Loading description…",
     "descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-    "dashboard": {
+    "agenda": {
       "today": "Today",
       "upcoming": "Upcoming",
       "noToday": "Nothing due today. You are all caught up.",

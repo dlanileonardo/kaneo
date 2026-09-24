@@ -1541,7 +1541,7 @@
       "more": "Más",
       "backToBoard": "Volver al tablero",
       "myTasks": "Mis tareas",
-      "dashboard": "Dashboard"
+      "agenda": "Agenda"
     },
     "projectList": {
       "viewProject": "Ver Proyecto",
@@ -2255,7 +2255,7 @@
     "descriptionRetry": "Retry",
     "descriptionLoading": "Loading description…",
     "descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-    "dashboard": {
+    "agenda": {
       "today": "Today",
       "upcoming": "Upcoming",
       "noToday": "Nothing due today. You are all caught up.",

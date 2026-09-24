@@ -23,15 +23,15 @@ import { type SortConfig, sortTasks } from "@/lib/sort-tasks";
 import { cn } from "@/lib/utils";
 import { useUserPreferencesStore } from "@/store/user-preferences";
 
-type DashboardSearchParams = {
+type AgendaSearchParams = {
   taskId?: string;
 };
 
 export const Route = createFileRoute(
-  "/_layout/_authenticated/dashboard/workspace/$workspaceId/dashboard",
+  "/_layout/_authenticated/dashboard/workspace/$workspaceId/agenda",
 )({
   component: RouteComponent,
-  validateSearch: (search: Record<string, unknown>): DashboardSearchParams => ({
+  validateSearch: (search: Record<string, unknown>): AgendaSearchParams => ({
     taskId: typeof search.taskId === "string" ? search.taskId : undefined,
   }),
 });
@@ -54,12 +54,12 @@ function ScopeSwitcher({
   }> = [
     {
       key: "today",
-      label: t("tasks:dashboard.today"),
+      label: t("tasks:agenda.today"),
       icon: Sun,
     },
     {
       key: "upcoming",
-      label: t("tasks:dashboard.upcoming"),
+      label: t("tasks:agenda.upcoming"),
       icon: CalendarClock,
     },
   ];
@@ -161,11 +161,11 @@ function RouteComponent() {
   return (
     <>
       <PageTitle
-        title={t("navigation:sidebar.dashboard")}
+        title={t("navigation:sidebar.agenda")}
         hideAppName
       />
       <WorkspaceLayout
-        title={t("navigation:sidebar.dashboard")}
+        title={t("navigation:sidebar.agenda")}
         headerActions={
           <div className="flex items-center gap-2">
             <div className="relative w-[180px]">
@@ -207,8 +207,8 @@ function RouteComponent() {
                 <StatusMessage
                   title={
                     scope === "today"
-                      ? t("tasks:dashboard.noToday")
-                      : t("tasks:dashboard.noUpcoming")
+                      ? t("tasks:agenda.noToday")
+                      : t("tasks:agenda.noUpcoming")
                   }
                 />
               ) : hasNoMatches ? (

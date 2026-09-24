@@ -1538,7 +1538,7 @@
       "invitations": "Invitations",
       "more": "More",
       "backToBoard": "Back to board",
-      "dashboard": "Dashboard"
+      "agenda": "Agenda"
     },
     "projectList": {
       "viewProject": "View Project",
@@ -2247,7 +2247,7 @@
     "descriptionRetry": "Retry",
     "descriptionLoading": "Loading description…",
     "descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-    "dashboard": {
+    "agenda": {
       "today": "Today",
       "upcoming": "Upcoming",
       "noToday": "Nothing due today. You are all caught up.",

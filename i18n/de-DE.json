@@ -1538,7 +1538,7 @@
       "more": "Mehr",
       "backToBoard": "Zurück zum Board",
       "myTasks": "Meine Aufgaben",
-      "dashboard": "Dashboard"
+      "agenda": "Agenda"
     },
     "projectList": {
       "viewProject": "Projekt ansehen",
@@ -2247,7 +2247,7 @@
     "descriptionRetry": "Erneut versuchen",
     "descriptionLoading": "Beschreibung wird geladen…",
     "descriptionLoadError": "Die Beschreibung konnte nicht geladen werden. Versuche es erneut, um die aktuelle Version zu laden.",
-    "dashboard": {
+    "agenda": {
       "today": "Today",
       "upcoming": "Upcoming",
       "noToday": "Nothing due today. You are all caught up.",

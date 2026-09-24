@@ -1535,7 +1535,7 @@
       "more": "更多",
       "backToBoard": "返回看板",
       "myTasks": "我的任务",
-      "dashboard": "Dashboard"
+      "agenda": "日程"
     },
     "projectList": {
       "viewProject": "查看项目",
@@ -2239,7 +2239,7 @@
     "descriptionRetry": "Retry",
     "descriptionLoading": "Loading description…",
     "descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-    "dashboard": {
+    "agenda": {
       "today": "Today",
       "upcoming": "Upcoming",
       "noToday": "Nothing due today. You are all caught up.",
