@@ -1,27 +1,30 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { isPast, isToday, startOfDay } from "date-fns";
+import { createFileRoute } from "@tanstack/react-router";
+import { CalendarClock, Search, Sun } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import WorkspaceLayout from "@/components/common/workspace-layout";
+import BoardToolbar from "@/components/board/board-toolbar";
+import KanbanBoard from "@/components/kanban-board";
+import ListView from "@/components/list-view";
 import PageTitle from "@/components/page-title";
 import TaskDetailsSheet from "@/components/task/task-details-sheet";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import icons from "@/constants/project-icons";
-import { useAgendaTasks } from "@/hooks/queries/task/use-agenda-tasks";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { formatDateShort } from "@/lib/format";
+import { TaskViewProvider } from "@/components/task/task-view-context";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import WorkspaceLayout from "@/components/common/workspace-layout";
+import { useBoardSort } from "@/hooks/use-board-sort";
+import {
+  AGENDA_BOARD_ID,
+  type AgendaScope,
+  useAgendaView,
+} from "@/hooks/use-agenda-view";
+import { useTaskFiltersWithLabelsSupport } from "@/hooks/use-task-filters-with-labels-support";
+import { WorkspacePermissionScope } from "@/hooks/use-workspace-permission";
+import { type SortConfig, sortTasks } from "@/lib/sort-tasks";
 import { cn } from "@/lib/utils";
-import type Task from "@/types/task";
+import { useUserPreferencesStore } from "@/store/user-preferences";
 
 type DashboardSearchParams = {
   taskId?: string;
-};
-
-type AgendaEntry = {
-  task: Task;
-  project: { id: string; name: string; icon: string | null };
-  dueDate: Date;
 };
 
 export const Route = createFileRoute(
@@ -33,110 +36,81 @@ export const Route = createFileRoute(
   }),
 });
 
-function TaskCard({
-  task,
-  projectName,
-  projectIcon,
-  onClick,
+const DEFAULT_SORT: SortConfig = { field: "dueDate", direction: "asc" };
+
+function ScopeSwitcher({
+  scope,
+  onScopeChange,
 }: {
-  task: Task;
-  projectName: string;
-  projectIcon: string | null;
-  onClick: () => void;
+  scope: AgendaScope;
+  onScopeChange: (scope: AgendaScope) => void;
 }) {
-  const IconComponent =
-    icons[projectIcon as keyof typeof icons] ?? icons.Layout;
-  const isOverdue = task.dueDate ? isPast(new Date(task.dueDate)) : false;
+  const { t } = useTranslation();
+
+  const scopes: Array<{
+    key: AgendaScope;
+    label: string;
+    icon: typeof Sun;
+  }> = [
+    {
+      key: "today",
+      label: t("tasks:dashboard.today"),
+      icon: Sun,
+    },
+    {
+      key: "upcoming",
+      label: t("tasks:dashboard.upcoming"),
+      icon: CalendarClock,
+    },
+  ];
 
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="group flex w-full items-center gap-3 rounded-lg border border-border/80 bg-card px-3 py-2.5 text-left transition-colors hover:bg-accent/50"
-    >
-      <IconComponent className="size-4 shrink-0 text-muted-foreground" />
-      <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm font-medium text-foreground">
-          {task.title}
-        </span>
-        <span className="block truncate text-xs text-muted-foreground">
-          {projectName}
-        </span>
-      </span>
-      {task.dueDate && (
-        <Badge
-          variant={isOverdue ? "destructive" : "secondary"}
-          className="shrink-0"
-        >
-          {formatDateShort(task.dueDate)}
-        </Badge>
-      )}
-    </button>
-  );
-}
-
-function Section({
-  title,
-  count,
-  children,
-  accent,
-}: {
-  title: string;
-  count: number;
-  children: React.ReactNode;
-  accent?: boolean;
-}) {
-  return (
-    <section className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden">
-      <div className="flex shrink-0 items-center gap-2">
-        <h2
+    <div className="inline-flex h-8 items-center gap-0.5 rounded-lg border border-border/80 bg-background p-0.5">
+      {scopes.map((item) => (
+        <Button
+          key={item.key}
+          variant={scope === item.key ? "secondary" : "ghost"}
+          size="xs"
+          onClick={() => onScopeChange(item.key)}
           className={cn(
-            "text-sm font-semibold uppercase tracking-wide",
-            accent ? "text-primary" : "text-muted-foreground",
+            "h-6 gap-1.5 rounded-md px-2 text-xs",
+            scope !== item.key && "text-muted-foreground",
           )}
         >
-          {title}
-        </h2>
-        <span
-          className={cn(
-            "flex h-5 min-w-5 items-center justify-center rounded-sm px-1 text-[11px] font-medium",
-            accent
-              ? "bg-primary text-primary-foreground"
-              : "bg-muted text-muted-foreground",
-          )}
-        >
-          {count}
-        </span>
-      </div>
-      {children}
-    </section>
-  );
-}
-
-function TaskListSkeleton() {
-  return (
-    <div className="flex flex-col gap-2">
-      {[0, 1, 2].map((i) => (
-        <div
-          key={i}
-          className="flex items-center gap-3 rounded-lg border border-border/80 bg-card px-3 py-2.5"
-        >
-          <Skeleton className="size-4" />
-          <div className="flex-1 space-y-1">
-            <Skeleton className="h-3.5 w-3/4" />
-            <Skeleton className="h-3 w-1/3" />
-          </div>
-        </div>
+          <item.icon className="size-3.5" />
+          {item.label}
+        </Button>
       ))}
     </div>
   );
 }
 
-function EmptyText({ children }: { children: React.ReactNode }) {
+function StatusMessage({
+  title,
+  subtitle,
+  muted = false,
+}: {
+  title: string;
+  subtitle?: string;
+  muted?: boolean;
+}) {
   return (
-    <p className="rounded-lg border border-dashed border-border/80 px-3 py-6 text-center text-sm text-muted-foreground">
-      {children}
-    </p>
+    <div className="flex flex-1 items-center justify-center px-6">
+      <div className="max-w-sm text-center">
+        <p
+          className={
+            muted
+              ? "text-sm text-muted-foreground"
+              : "text-sm font-semibold text-foreground"
+          }
+        >
+          {title}
+        </p>
+        {subtitle ? (
+          <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
+        ) : null}
+      </div>
+    </div>
   );
 }
 
@@ -144,132 +118,119 @@ function RouteComponent() {
   const { t } = useTranslation();
   const { workspaceId } = Route.useParams();
   const { taskId } = Route.useSearch();
-  const navigate = useNavigate();
-  const isMobile = useIsMobile();
-  const { tasks, isLoading } = useAgendaTasks({ workspaceId });
-  const [selected, setSelected] = useState<{
-    taskId: string;
-    projectId: string;
-  } | null>(null);
+  const { viewMode, setViewMode } = useUserPreferencesStore();
+  const [scope, setScope] = useState<AgendaScope>("today");
+  const [searchQuery, setSearchQuery] = useState("");
+  const { sort, setSort } = useBoardSort(AGENDA_BOARD_ID, DEFAULT_SORT);
+  const { board, projects, labels, taskView, getProjectSlug, isLoading, sheet } =
+    useAgendaView({ workspaceId, scope, taskId });
 
-  const now = startOfDay(new Date());
+  const {
+    filters,
+    updateFilter,
+    updateLabelFilter,
+    updateCustomFieldFilter,
+    filteredProject,
+    hasActiveFilters,
+    clearFilters,
+  } = useTaskFiltersWithLabelsSupport(
+    board,
+    AGENDA_BOARD_ID,
+    searchQuery,
+    getProjectSlug,
+  );
 
-  const { today, upcoming } = useMemo(() => {
-    const todayEntries: AgendaEntry[] = [];
-    const upcomingEntries: AgendaEntry[] = [];
-
-    for (const entry of tasks) {
-      if (!entry.task.dueDate) continue;
-      const due = new Date(entry.task.dueDate);
-      if (!Number.isNaN(due.getTime())) {
-        if (isToday(due) || isPast(due)) {
-          todayEntries.push({ ...entry, dueDate: due });
-        } else if (due > now) {
-          upcomingEntries.push({ ...entry, dueDate: due });
-        }
-      }
-    }
-
-    const byDate = (a: AgendaEntry, b: AgendaEntry) =>
-      a.dueDate.getTime() - b.dueDate.getTime();
-
+  const sortedBoard = useMemo(() => {
+    if (!filteredProject || sort.field === "position") return filteredProject;
     return {
-      today: todayEntries.sort(byDate),
-      upcoming: upcomingEntries.sort(byDate),
+      ...filteredProject,
+      columns: filteredProject.columns.map((column) => ({
+        ...column,
+        tasks: sortTasks(column.tasks, sort),
+      })),
     };
-  }, [tasks, now]);
+  }, [filteredProject, sort]);
 
-  const handleOpenTask = (taskId: string, projectId: string) => {
-    if (isMobile) {
-      navigate({
-        to: "/dashboard/workspace/$workspaceId/project/$projectId/task/$taskId",
-        params: { workspaceId, projectId, taskId },
-      });
-      return;
-    }
-    setSelected({ taskId, projectId });
-    navigate({ to: ".", search: { taskId }, replace: true });
-  };
-
-  const handleClose = () => {
-    setSelected(null);
-    navigate({ to: ".", search: {}, replace: true });
-  };
-
-  const activeProjectId =
-    selected?.projectId ??
-    tasks.find((entry) => entry.task.id === taskId)?.project.id;
+  const hasNoTasks =
+    board?.columns.every((column) => column.tasks.length === 0) ?? false;
+  const hasNoMatches =
+    !hasNoTasks &&
+    (sortedBoard?.columns.every((column) => column.tasks.length === 0) ??
+      false);
 
   return (
     <>
-      <PageTitle title={t("navigation:sidebar.dashboard")} />
-      <WorkspaceLayout title={t("navigation:sidebar.dashboard")}>
-        <div className="flex h-full min-h-0 w-full overflow-hidden">
-          <div
-            className={cn(
-              "flex min-h-0 w-full gap-6 p-4",
-              isMobile ? "flex-col overflow-y-auto" : "flex-row overflow-hidden",
-            )}
-          >
-            <Section
-              title={t("tasks:dashboard.today")}
-              count={today.length}
-              accent
-            >
-              {isLoading ? (
-                <TaskListSkeleton />
-              ) : today.length === 0 ? (
-                <EmptyText>{t("tasks:dashboard.noToday")}</EmptyText>
-              ) : (
-                <div className="flex flex-col gap-2 overflow-y-auto">
-                  {today.map((entry) => (
-                    <TaskCard
-                      key={entry.task.id}
-                      task={entry.task}
-                      projectName={entry.project.name}
-                      projectIcon={entry.project.icon}
-                      onClick={() =>
-                        handleOpenTask(entry.task.id, entry.project.id)
-                      }
-                    />
-                  ))}
-                </div>
-              )}
-            </Section>
-
-            <Section title={t("tasks:dashboard.upcoming")} count={upcoming.length}>
-            {isLoading ? (
-              <TaskListSkeleton />
-            ) : upcoming.length === 0 ? (
-              <EmptyText>{t("tasks:dashboard.noUpcoming")}</EmptyText>
-            ) : (
-              <div className="flex flex-col gap-2 overflow-y-auto">
-                {upcoming.map((entry) => (
-                  <TaskCard
-                    key={entry.task.id}
-                    task={entry.task}
-                    projectName={entry.project.name}
-                    projectIcon={entry.project.icon}
-                    onClick={() =>
-                      handleOpenTask(entry.task.id, entry.project.id)
-                    }
-                  />
-                ))}
-              </div>
-            )}
-          </Section>
+      <PageTitle
+        title={t("navigation:sidebar.dashboard")}
+        hideAppName
+      />
+      <WorkspaceLayout
+        title={t("navigation:sidebar.dashboard")}
+        headerActions={
+          <div className="flex items-center gap-2">
+            <div className="relative w-[180px]">
+              <Search className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 text-muted-foreground" />
+              <Input
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder={t("tasks:boardSearchPlaceholder")}
+                className="h-7.5 [&_[data-slot=input]]:h-7 [&_[data-slot=input]]:leading-7 [&_[data-slot=input]]:pl-8 [&_[data-slot=input]]:text-xs [&_[data-slot=input]]:placeholder:text-xs [&_[data-slot=input]]:placeholder:leading-7"
+              />
+            </div>
+            <ScopeSwitcher scope={scope} onScopeChange={setScope} />
           </div>
-        </div>
-      </WorkspaceLayout>
+        }
+      >
+        <TaskViewProvider value={taskView}>
+          <div className="relative flex h-full min-h-0 flex-col overflow-hidden">
+            <BoardToolbar
+              project={board}
+              projects={projects}
+              showAssigneeFilter={false}
+              filters={filters}
+              updateFilter={updateFilter}
+              updateLabelFilter={updateLabelFilter}
+              updateCustomFieldFilter={updateCustomFieldFilter}
+              clearFilters={clearFilters}
+              hasActiveFilters={hasActiveFilters}
+              workspaceLabels={labels}
+              viewMode={viewMode}
+              setViewMode={setViewMode}
+              sort={sort}
+              onSortChange={setSort}
+            />
 
-      {activeProjectId && (
-        <TaskDetailsSheet
-          taskId={taskId}
-          projectId={activeProjectId}
-          workspaceId={workspaceId}
-          onClose={handleClose}
-        />
-      )}
+            <div className="flex h-full flex-1 overflow-hidden bg-background">
+              {isLoading || !sortedBoard ? (
+                <StatusMessage title={t("common:empty.loading")} muted />
+              ) : hasNoTasks ? (
+                <StatusMessage
+                  title={
+                    scope === "today"
+                      ? t("tasks:dashboard.noToday")
+                      : t("tasks:dashboard.noUpcoming")
+                  }
+                />
+              ) : hasNoMatches ? (
+                <StatusMessage title={t("tasks:myTasks.noMatches")} />
+              ) : viewMode === "board" ? (
+                <KanbanBoard project={sortedBoard} disableDragDrop />
+              ) : (
+                <ListView project={sortedBoard} disableDragDrop />
+              )}
+            </div>
+
+            <WorkspacePermissionScope value={sheet.workspaceId}>
+              <TaskDetailsSheet
+                taskId={sheet.taskId}
+                projectId={sheet.projectId ?? ""}
+                workspaceId={sheet.workspaceId ?? ""}
+                onClose={sheet.onClose}
+              />
+            </WorkspacePermissionScope>
+          </div>
+        </TaskViewProvider>
+      </WorkspaceLayout>
     </>
   );
 }
