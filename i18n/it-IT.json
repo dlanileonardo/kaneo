@@ -1539,7 +1539,9 @@
 			"members": "Membri",
 			"invitations": "Inviti",
 			"more": "Altro",
-			"backToBoard": "Torna alla board"
+			"backToBoard": "Torna alla board",
+			"myTasks": "Le mie attività",
+			"agenda": "Agenda"
 		},
 		"projectList": {
 			"viewProject": "Vedi Progetto",
@@ -2093,12 +2095,14 @@
 				"priority": "Priorità",
 				"assignee": "Assegnatario",
 				"dueDate": "Data scadenza",
-				"labels": "Etichette"
+				"labels": "Etichette",
+				"project": "Progetto"
 			},
 			"operators": {
 				"isAnyOf": "è uno di",
 				"includeAnyOf": "include uno di"
 			},
+			"allProjects": "Tutti i progetti",
 			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
@@ -2237,11 +2241,26 @@
 			"today": "Today",
 			"loadError": "Failed to load tasks."
 		},
+		"myTasks": {
+			"empty": "Nessuna attività assegnata a te",
+			"emptySubtitle": "Le attività assegnate a te in uno qualsiasi dei tuoi workspace compariranno qui.",
+			"loadError": "Impossibile caricare le tue attività.",
+			"pageTitle": "Le mie attività · {{view}}",
+			"title": "Le mie attività",
+			"noMatches": "Nessuna attività corrisponde",
+			"noMatchesSubtitle": "Prova una ricerca diversa o cancella i filtri attivi."
+		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"email": {

@@ -1536,7 +1536,9 @@
 			"members": "Üyeler",
 			"invitations": "Davetler",
 			"more": "Daha fazla",
-			"backToBoard": "Panoya dön"
+			"backToBoard": "Panoya dön",
+			"myTasks": "Görevlerim",
+			"agenda": "Gündem"
 		},
 		"projectList": {
 			"viewProject": "Projeyi Görüntüle",
@@ -2086,12 +2088,14 @@
 				"priority": "Öncelik",
 				"assignee": "Atanan",
 				"dueDate": "Bitiş tarihi",
-				"labels": "Etiketler"
+				"labels": "Etiketler",
+				"project": "Proje"
 			},
 			"operators": {
 				"isAnyOf": "herhangi biri",
 				"includeAnyOf": "herhangi birini içer"
 			},
+			"allProjects": "Tüm projeler",
 			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
@@ -2229,11 +2233,26 @@
 			"today": "Today",
 			"loadError": "Failed to load tasks."
 		},
+		"myTasks": {
+			"empty": "Size atanmış bir şey yok",
+			"emptySubtitle": "Çalışma alanlarınızın herhangi birinde size atanan görevler burada görünür.",
+			"loadError": "Görevleriniz yüklenemedi.",
+			"pageTitle": "Görevlerim · {{view}}",
+			"title": "Görevlerim",
+			"noMatches": "Eşleşen görev yok",
+			"noMatchesSubtitle": "Farklı bir arama deneyin veya etkin filtreleri temizleyin."
+		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"pageTitle": "Davetler",

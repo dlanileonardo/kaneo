@@ -1536,7 +1536,9 @@
 			"members": "सदस्य",
 			"invitations": "निमंत्रण",
 			"more": "और",
-			"backToBoard": "बोर्ड पर वापस जाएँ"
+			"backToBoard": "बोर्ड पर वापस जाएँ",
+			"myTasks": "मेरे कार्य",
+			"agenda": "एजेंडा"
 		},
 		"projectList": {
 			"viewProject": "प्रोजेक्ट देखें",
@@ -2086,12 +2088,14 @@
 				"priority": "प्राथमिकता",
 				"assignee": "सौंपा गया",
 				"dueDate": "नियत तारीख",
-				"labels": "लेबल"
+				"labels": "लेबल",
+				"project": "प्रोजेक्ट"
 			},
 			"operators": {
 				"isAnyOf": "में से कोई है",
 				"includeAnyOf": "में से कोई शामिल है"
 			},
+			"allProjects": "सभी प्रोजेक्ट",
 			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
@@ -2229,11 +2233,26 @@
 			"today": "Today",
 			"loadError": "Failed to load tasks."
 		},
+		"myTasks": {
+			"empty": "आपको कुछ भी नहीं सौंपा गया है",
+			"emptySubtitle": "आपके किसी भी वर्कस्पेस में आपको सौंपे गए कार्य यहाँ दिखाई देंगे।",
+			"loadError": "आपके कार्य लोड नहीं हो सके।",
+			"pageTitle": "मेरे कार्य · {{view}}",
+			"title": "मेरे कार्य",
+			"noMatches": "कोई कार्य मेल नहीं खाता",
+			"noMatchesSubtitle": "कोई अन्य खोज आज़माएँ या सक्रिय फ़िल्टर हटाएँ।"
+		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"email": {

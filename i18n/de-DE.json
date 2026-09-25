@@ -1536,7 +1536,9 @@
 			"members": "Mitglieder",
 			"invitations": "Einladungen",
 			"more": "Mehr",
-			"backToBoard": "Zurück zum Board"
+			"backToBoard": "Zurück zum Board",
+			"myTasks": "Meine Aufgaben",
+			"agenda": "Agenda"
 		},
 		"projectList": {
 			"viewProject": "Projekt ansehen",
@@ -2086,12 +2088,14 @@
 				"priority": "Priorität",
 				"assignee": "Zugewiesen",
 				"dueDate": "Fälligkeitsdatum",
-				"labels": "Labels"
+				"labels": "Labels",
+				"project": "Projekt"
 			},
 			"operators": {
 				"isAnyOf": "ist einer von",
 				"includeAnyOf": "enthält einen von"
 			},
+			"allProjects": "Alle Projekte",
 			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
@@ -2229,11 +2233,26 @@
 			"today": "Today",
 			"loadError": "Failed to load tasks."
 		},
+		"myTasks": {
+			"empty": "Dir ist nichts zugewiesen",
+			"emptySubtitle": "Aufgaben, die dir in einem deiner Workspaces zugewiesen sind, erscheinen hier.",
+			"loadError": "Deine Aufgaben konnten nicht geladen werden.",
+			"pageTitle": "Meine Aufgaben · {{view}}",
+			"title": "Meine Aufgaben",
+			"noMatches": "Keine passenden Aufgaben",
+			"noMatchesSubtitle": "Versuche eine andere Suche oder entferne die aktiven Filter."
+		},
 		"descriptionSearchLoading": "Vollständige Beschreibungen werden durchsucht…",
 		"descriptionSearchError": "Die Suche in Beschreibungen ist fehlgeschlagen. Ergebnisse sind möglicherweise unvollständig.",
 		"descriptionRetry": "Erneut versuchen",
 		"descriptionLoading": "Beschreibung wird geladen…",
-		"descriptionLoadError": "Die Beschreibung konnte nicht geladen werden. Versuche es erneut, um die aktuelle Version zu laden."
+		"descriptionLoadError": "Die Beschreibung konnte nicht geladen werden. Versuche es erneut, um die aktuelle Version zu laden.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"email": {

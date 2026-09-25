@@ -1533,7 +1533,9 @@
 			"members": "멤버",
 			"invitations": "초대",
 			"more": "더 보기",
-			"backToBoard": "보드로 돌아가기"
+			"backToBoard": "보드로 돌아가기",
+			"myTasks": "내 작업",
+			"agenda": "일정"
 		},
 		"projectList": {
 			"viewProject": "프로젝트 보기",
@@ -2079,12 +2081,14 @@
 				"priority": "우선순위",
 				"assignee": "담당자",
 				"dueDate": "마감일",
-				"labels": "라벨"
+				"labels": "라벨",
+				"project": "프로젝트"
 			},
 			"operators": {
 				"isAnyOf": "다음 중 하나",
 				"includeAnyOf": "다음 중 하나 포함"
 			},
+			"allProjects": "모든 프로젝트",
 			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
@@ -2221,11 +2225,26 @@
 				"deleteTable": "표 삭제"
 			}
 		},
+		"myTasks": {
+			"empty": "할당된 작업이 없습니다",
+			"emptySubtitle": "어느 워크스페이스에서든 나에게 할당된 작업이 여기에 표시됩니다.",
+			"loadError": "작업을 불러오지 못했습니다.",
+			"pageTitle": "내 작업 · {{view}}",
+			"title": "내 작업",
+			"noMatches": "일치하는 작업이 없습니다",
+			"noMatchesSubtitle": "다른 검색어를 시도하거나 활성 필터를 지우세요."
+		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"email": {

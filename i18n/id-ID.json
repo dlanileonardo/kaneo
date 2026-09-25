@@ -1533,7 +1533,9 @@
 			"members": "Anggota",
 			"invitations": "Undangan",
 			"more": "Lainnya",
-			"backToBoard": "Kembali ke papan"
+			"backToBoard": "Kembali ke papan",
+			"myTasks": "Tugas saya",
+			"agenda": "Agenda"
 		},
 		"projectList": {
 			"viewProject": "Lihat Proyek",
@@ -2079,12 +2081,14 @@
 				"priority": "Prioritas",
 				"assignee": "Penanggung jawab",
 				"dueDate": "Tenggat",
-				"labels": "Label"
+				"labels": "Label",
+				"project": "Proyek"
 			},
 			"operators": {
 				"isAnyOf": "adalah salah satu dari",
 				"includeAnyOf": "menyertakan salah satu dari"
 			},
+			"allProjects": "Semua proyek",
 			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
@@ -2221,11 +2225,26 @@
 			"today": "Today",
 			"loadError": "Failed to load tasks."
 		},
+		"myTasks": {
+			"empty": "Tidak ada yang ditugaskan kepada Anda",
+			"emptySubtitle": "Tugas yang ditugaskan kepada Anda di salah satu ruang kerja Anda akan muncul di sini.",
+			"loadError": "Gagal memuat tugas Anda.",
+			"pageTitle": "Tugas saya · {{view}}",
+			"title": "Tugas saya",
+			"noMatches": "Tidak ada tugas yang cocok",
+			"noMatchesSubtitle": "Coba pencarian lain atau hapus filter yang aktif."
+		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"email": {

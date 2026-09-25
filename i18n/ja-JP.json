@@ -1533,7 +1533,9 @@
 			"members": "メンバー",
 			"invitations": "招待",
 			"more": "その他",
-			"backToBoard": "ボードに戻る"
+			"backToBoard": "ボードに戻る",
+			"myTasks": "マイタスク",
+			"agenda": "アジェンダ"
 		},
 		"projectList": {
 			"viewProject": "プロジェクトを表示",
@@ -2079,12 +2081,14 @@
 				"priority": "優先度",
 				"assignee": "担当者",
 				"dueDate": "期限",
-				"labels": "ラベル"
+				"labels": "ラベル",
+				"project": "プロジェクト"
 			},
 			"operators": {
 				"isAnyOf": "次のいずれか",
 				"includeAnyOf": "次のいずれかを含む"
 			},
+			"allProjects": "すべてのプロジェクト",
 			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
@@ -2221,11 +2225,26 @@
 				"deleteTable": "表を削除"
 			}
 		},
+		"myTasks": {
+			"empty": "割り当てられたタスクはありません",
+			"emptySubtitle": "いずれかのワークスペースであなたに割り当てられたタスクがここに表示されます。",
+			"loadError": "タスクを読み込めませんでした。",
+			"pageTitle": "マイタスク · {{view}}",
+			"title": "マイタスク",
+			"noMatches": "一致するタスクはありません",
+			"noMatchesSubtitle": "別の検索を試すか、有効なフィルターを解除してください。"
+		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"email": {

@@ -1542,7 +1542,9 @@
 			"members": "Учасники",
 			"invitations": "Запрошення",
 			"more": "Більше",
-			"backToBoard": "Назад до дошки"
+			"backToBoard": "Назад до дошки",
+			"myTasks": "Мої завдання",
+			"agenda": "Агенда"
 		},
 		"projectList": {
 			"viewProject": "Переглянути проєкт",
@@ -2100,12 +2102,14 @@
 				"priority": "Пріоритет",
 				"assignee": "Виконавець",
 				"dueDate": "Дата завершення",
-				"labels": "Мітки"
+				"labels": "Мітки",
+				"project": "Проєкт"
 			},
 			"operators": {
 				"isAnyOf": "є будь-яким з",
 				"includeAnyOf": "включає будь-який з"
 			},
+			"allProjects": "Усі проєкти",
 			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
@@ -2245,11 +2249,26 @@
 			"today": "Today",
 			"loadError": "Failed to load tasks."
 		},
+		"myTasks": {
+			"empty": "Вам нічого не призначено",
+			"emptySubtitle": "Завдання, призначені вам у будь-якому з ваших робочих просторів, з'являтимуться тут.",
+			"loadError": "Не вдалося завантажити ваші завдання.",
+			"pageTitle": "Мої завдання · {{view}}",
+			"title": "Мої завдання",
+			"noMatches": "Немає відповідних завдань",
+			"noMatchesSubtitle": "Спробуйте інший запит або очистьте активні фільтри."
+		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"email": {

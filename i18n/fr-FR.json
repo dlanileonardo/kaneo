@@ -1539,7 +1539,9 @@
 			"members": "Membres",
 			"invitations": "Invitations",
 			"more": "Plus",
-			"backToBoard": "Retour au tableau"
+			"backToBoard": "Retour au tableau",
+			"myTasks": "Mes tâches",
+			"agenda": "Agenda"
 		},
 		"projectList": {
 			"viewProject": "Voir le projet",
@@ -2093,12 +2095,14 @@
 				"priority": "Priorité",
 				"assignee": "Assigné",
 				"dueDate": "Date d'échéance",
-				"labels": "Labels"
+				"labels": "Labels",
+				"project": "Projet"
 			},
 			"operators": {
 				"isAnyOf": "est l'un des",
 				"includeAnyOf": "inclut l'un des"
 			},
+			"allProjects": "Tous les projets",
 			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
@@ -2237,11 +2241,26 @@
 			"today": "Today",
 			"loadError": "Failed to load tasks."
 		},
+		"myTasks": {
+			"empty": "Rien ne vous est assigné",
+			"emptySubtitle": "Les tâches qui vous sont assignées dans n'importe lequel de vos espaces de travail apparaîtront ici.",
+			"loadError": "Impossible de charger vos tâches.",
+			"pageTitle": "Mes tâches · {{view}}",
+			"title": "Mes tâches",
+			"noMatches": "Aucune tâche ne correspond",
+			"noMatchesSubtitle": "Essayez une autre recherche ou effacez les filtres actifs."
+		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"email": {

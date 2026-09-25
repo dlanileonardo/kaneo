@@ -12,6 +12,7 @@ const DEFAULT_FILTERS: BoardFilters = {
   assignee: null,
   dueDate: null,
   labels: null,
+  project: null,
   customFields: null,
 };
 
@@ -21,6 +22,7 @@ const FILTER_KEYS: Array<keyof BoardFilters> = [
   "assignee",
   "dueDate",
   "labels",
+  "project",
   "customFields",
 ];
 
@@ -65,6 +67,7 @@ export function useTaskFiltersWithLabelsSupport(
   project: ProjectWithTasks | null | undefined,
   projectId?: string,
   textQuery?: string,
+  getTaskProjectSlug?: (task: Task) => string | undefined,
   descriptionMatches?: ReadonlySet<string>,
 ) {
   const weekStartsOn = useUserPreferencesStore((state) => state.weekStartsOn);
@@ -107,9 +110,10 @@ export function useTaskFiltersWithLabelsSupport(
           const title = task.title?.toLowerCase() ?? "";
           const description = task.description?.toLowerCase() ?? "";
           const taskNumber = task.number?.toString() ?? "";
+          const projectSlug = getTaskProjectSlug?.(task) ?? project?.slug;
           const taskIdentifier =
-            taskNumber && project?.slug
-              ? `${project.slug}-${taskNumber}`.toLowerCase()
+            taskNumber && projectSlug
+              ? `${projectSlug}-${taskNumber}`.toLowerCase()
               : "";
           const taskShortIdentifier = taskNumber ? `#${taskNumber}` : "";
           const matchesText =
@@ -145,6 +149,14 @@ export function useTaskFiltersWithLabelsSupport(
           filters.assignee &&
           filters.assignee.length > 0 &&
           !filters.assignee.includes(task.userId ?? "")
+        ) {
+          return false;
+        }
+
+        if (
+          filters.project &&
+          filters.project.length > 0 &&
+          !filters.project.includes(task.projectId)
         ) {
           return false;
         }
@@ -241,6 +253,7 @@ export function useTaskFiltersWithLabelsSupport(
     },
     [
       filters,
+      getTaskProjectSlug,
       project?.slug,
       textQuery,
       weekStartsOn,

@@ -205,6 +205,7 @@ function RouteComponent() {
     project,
     projectId,
     boardSearchQuery,
+    undefined,
     descriptionSearch.ids,
   );
 

@@ -344,91 +344,11 @@
 	},
 	"settings": {
 		"account": "Account",
-		"administration": "Administration",
 		"developer": "Developer",
 		"information": "Information",
 		"notifications": "Notifications",
 		"preferences": "Preferences",
 		"apiKeys": "API Keys",
-		"adminUsers": {
-			"title": "User management",
-			"subtitle": "Manage every account registered on this Kaneo instance.",
-			"instanceBadge": "Instance",
-			"directoryTitle": "User directory",
-			"userCount_one": "{{count}} registered user",
-			"userCount_other": "{{count}} registered users",
-			"searchCount_one": "{{count}} matching user",
-			"searchCount_other": "{{count}} matching users",
-			"refreshing": "Refreshing users",
-			"searchPlaceholder": "Search name or email…",
-			"searchLabel": "Search users",
-			"loadError": "Users could not be loaded.",
-			"retry": "Retry",
-			"emptyTitle": "No users found",
-			"emptyDescription": "Try another name or email address.",
-			"clearSearch": "Clear search",
-			"you": "(you)",
-			"previous": "Previous",
-			"next": "Next",
-			"pagination": "Page {{current}} of {{total}}",
-			"columns": {
-				"user": "User",
-				"role": "Global role",
-				"status": "Status",
-				"joined": "Joined",
-				"actions": "Actions"
-			},
-			"roles": {
-				"admin": "Instance admin",
-				"user": "User"
-			},
-			"status": {
-				"active": "Active",
-				"deactivated": "Deactivated"
-			},
-			"actions": {
-				"open": "Actions for {{name}}",
-				"edit": "Edit account",
-				"deactivate": "Deactivate account",
-				"reactivate": "Reactivate account"
-			},
-			"edit": {
-				"title": "Edit user",
-				"description": "Update this account's identity and instance-wide access.",
-				"name": "Full name",
-				"email": "Email address",
-				"role": "Global role",
-				"selfRoleHint": "You cannot change your own global role.",
-				"save": "Save changes",
-				"saving": "Saving…"
-			},
-			"confirm": {
-				"working": "Working…",
-				"deactivate": {
-					"title": "Deactivate this account?",
-					"description": "{{name}} will be signed out and unable to sign in until an administrator reactivates the account.",
-					"action": "Deactivate account"
-				},
-				"reactivate": {
-					"title": "Reactivate this account?",
-					"description": "{{name}} will be able to sign in and access their workspaces again.",
-					"action": "Reactivate account"
-				},
-				"delete": {
-					"title": "Permanently delete this account?",
-					"description": "This permanently deletes {{name}}, their sessions, memberships, and associated data. This cannot be undone.",
-					"action": "Delete permanently"
-				}
-			},
-			"toast": {
-				"updated": "User updated",
-				"updateError": "Failed to update user",
-				"deactivated": "User deactivated",
-				"reactivated": "User reactivated",
-				"deleted": "User deleted",
-				"actionError": "Failed to update user status"
-			}
-		},
 		"informationPage": {
 			"pageTitle": "Personal Information",
 			"title": "Personal Information",
@@ -1505,6 +1425,86 @@
 			"merged": "Merged",
 			"draft": "Draft",
 			"open": "Open"
+		},
+		"administration": "Administration",
+		"adminUsers": {
+			"title": "User management",
+			"subtitle": "Manage every account registered on this Kaneo instance.",
+			"instanceBadge": "Instance",
+			"directoryTitle": "User directory",
+			"userCount_one": "{{count}} registered user",
+			"userCount_other": "{{count}} registered users",
+			"searchCount_one": "{{count}} matching user",
+			"searchCount_other": "{{count}} matching users",
+			"refreshing": "Refreshing users",
+			"searchPlaceholder": "Search name or email…",
+			"searchLabel": "Search users",
+			"loadError": "Users could not be loaded.",
+			"retry": "Retry",
+			"emptyTitle": "No users found",
+			"emptyDescription": "Try another name or email address.",
+			"clearSearch": "Clear search",
+			"you": "(you)",
+			"previous": "Previous",
+			"next": "Next",
+			"pagination": "Page {{current}} of {{total}}",
+			"columns": {
+				"user": "User",
+				"role": "Global role",
+				"status": "Status",
+				"joined": "Joined",
+				"actions": "Actions"
+			},
+			"roles": {
+				"admin": "Instance admin",
+				"user": "User"
+			},
+			"status": {
+				"active": "Active",
+				"deactivated": "Deactivated"
+			},
+			"actions": {
+				"open": "Actions for {{name}}",
+				"edit": "Edit account",
+				"deactivate": "Deactivate account",
+				"reactivate": "Reactivate account"
+			},
+			"edit": {
+				"title": "Edit user",
+				"description": "Update this account's identity and instance-wide access.",
+				"name": "Full name",
+				"email": "Email address",
+				"role": "Global role",
+				"selfRoleHint": "You cannot change your own global role.",
+				"save": "Save changes",
+				"saving": "Saving…"
+			},
+			"confirm": {
+				"working": "Working…",
+				"deactivate": {
+					"title": "Deactivate this account?",
+					"description": "{{name}} will be signed out and unable to sign in until an administrator reactivates the account.",
+					"action": "Deactivate account"
+				},
+				"reactivate": {
+					"title": "Reactivate this account?",
+					"description": "{{name}} will be able to sign in and access their workspaces again.",
+					"action": "Reactivate account"
+				},
+				"delete": {
+					"title": "Permanently delete this account?",
+					"description": "This permanently deletes {{name}}, their sessions, memberships, and associated data. This cannot be undone.",
+					"action": "Delete permanently"
+				}
+			},
+			"toast": {
+				"updated": "User updated",
+				"updateError": "Failed to update user",
+				"deactivated": "User deactivated",
+				"reactivated": "User reactivated",
+				"deleted": "User deleted",
+				"actionError": "Failed to update user status"
+			}
 		}
 	},
 	"navigation": {
@@ -1532,11 +1532,13 @@
 		"notifications": "Notifications",
 		"sidebar": {
 			"overview": "Overview",
+			"myTasks": "My tasks",
 			"projects": "Projects",
 			"members": "Members",
 			"invitations": "Invitations",
 			"more": "More",
-			"backToBoard": "Back to board"
+			"backToBoard": "Back to board",
+			"agenda": "Agenda"
 		},
 		"projectList": {
 			"viewProject": "View Project",
@@ -1819,6 +1821,15 @@
 			"board": "Board",
 			"list": "List"
 		},
+		"myTasks": {
+			"title": "My tasks",
+			"pageTitle": "My tasks · {{view}}",
+			"empty": "Nothing assigned to you",
+			"emptySubtitle": "Tasks assigned to you in any of your workspaces will show up here.",
+			"noMatches": "No tasks match",
+			"noMatchesSubtitle": "Try a different search or clear the active filters.",
+			"loadError": "Failed to load your tasks."
+		},
 		"common": {
 			"selectTask": "Select task",
 			"loadingTask": "Loading task...",
@@ -2090,12 +2101,14 @@
 				"priority": "Priority",
 				"assignee": "Assignee",
 				"dueDate": "Due date",
-				"labels": "Labels"
+				"labels": "Labels",
+				"project": "Project"
 			},
 			"operators": {
 				"isAnyOf": "is any of",
 				"includeAnyOf": "include any of"
-			}
+			},
+			"allProjects": "All projects"
 		},
 		"calendar": {
 			"pageTitle": "{{name}} – Calendar",
@@ -2233,7 +2246,13 @@
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
+		"agenda": {
+			"today": "Today",
+			"upcoming": "Upcoming",
+			"noToday": "Nothing due today. You are all caught up.",
+			"noUpcoming": "No upcoming tasks."
+		}
 	},
 	"invitations": {
 		"email": {
