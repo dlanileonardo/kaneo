@@ -59,3 +59,6 @@ apps/web/.tanstack/
 
 # TypeScript incremental build state
 *.tsbuildinfo
+
+# pnpm local store (created when installing inside a container mount)
+.pnpm-store/
