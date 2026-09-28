@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import getAssignedTasks from "./get-assigned-tasks";
 
 const mocks = vi.hoisted(() => ({
@@ -74,7 +74,9 @@ describe("getAssignedTasks", () => {
 
     const result = await getAssignedTasks();
 
-    expect(mocks.get.mock.calls.map(([args]) => args)).toEqual([
+    expect(
+      mocks.get.mock.calls.map(([args]) => args as { query?: unknown }),
+    ).toEqual([
       { query: {} },
       { query: { page: "2" } },
       { query: { page: "3" } },

@@ -7,7 +7,7 @@ export type TaskLabelDecoration = { id: string; name: string; color: string };
 export type TaskExternalLinkDecoration = {
   id: string;
   taskId: string;
-  integrationId: string;
+  integrationId: string | null;
   resourceType: string;
   externalId: string;
   url: string;

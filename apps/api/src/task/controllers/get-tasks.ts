@@ -26,9 +26,10 @@ import {
   descriptionDeferred,
   projectDescriptionDeferred,
 } from "../description-pages";
-import { loadTaskDecorations } from "./load-task-decorations";
+import { getSubtaskCounts } from "../get-subtask-counts";
 
 export type GetTasksOptions = {
+  publicOnly?: boolean;
   assigneeId?: string;
   dueAfter?: string;
   dueBefore?: string;
@@ -172,10 +173,81 @@ async function getTasksPage(
 
   const taskIds = paginatedTasks.map((task) => task.id);
 
-  const { labelsByTask, externalLinksByTask } = await loadTaskDecorations(
+  const subtaskCounts = await getSubtaskCounts(
+    db,
     taskIds,
-    { limit: relatedPageSize, offset: relatedOffset },
+    project.workspaceId,
+    options.publicOnly ?? false,
   );
+
+  const labelsData =
+    taskIds.length > 0
+      ? await db
+          .select({
+            id: labelTable.id,
+            name: labelTable.name,
+            color: labelTable.color,
+            taskId: labelTable.taskId,
+          })
+          .from(labelTable)
+          .where(inArray(labelTable.taskId, taskIds))
+          .orderBy(asc(labelTable.id))
+          .limit(relatedPageSize)
+          .offset(relatedOffset)
+      : [];
+
+  const externalLinksData =
+    taskIds.length > 0
+      ? await db
+          .select()
+          .from(externalLinkTable)
+          .where(inArray(externalLinkTable.taskId, taskIds))
+          .orderBy(asc(externalLinkTable.id))
+          .limit(relatedPageSize)
+          .offset(relatedOffset)
+      : [];
+
+  const taskLabelsMap = new Map<
+    string,
+    Array<{ id: string; name: string; color: string }>
+  >();
+  for (const label of labelsData) {
+    if (label.taskId) {
+      if (!taskLabelsMap.has(label.taskId)) {
+        taskLabelsMap.set(label.taskId, []);
+      }
+      taskLabelsMap.get(label.taskId)?.push({
+        id: label.id,
+        name: label.name,
+        color: label.color,
+      });
+    }
+  }
+
+  const taskExternalLinksMap = new Map<
+    string,
+    Array<{
+      id: string;
+      taskId: string;
+      integrationId: string | null;
+      resourceType: string;
+      externalId: string;
+      url: string;
+      title: string | null;
+      metadata: Record<string, unknown> | null;
+      createdAt: Date;
+      updatedAt: Date;
+    }>
+  >();
+  for (const externalLink of externalLinksData) {
+    if (!taskExternalLinksMap.has(externalLink.taskId)) {
+      taskExternalLinksMap.set(externalLink.taskId, []);
+    }
+    taskExternalLinksMap.get(externalLink.taskId)?.push({
+      ...externalLink,
+      metadata: parseMetadata(externalLink.metadata),
+    });
+  }
 
   const projectColumns = await db
     .select()
@@ -243,8 +315,9 @@ async function getTasksPage(
       .filter((task) => task.status === column.slug)
       .map((task) => ({
         ...task,
-        labels: labelsByTask.get(task.id) || [],
-        externalLinks: externalLinksByTask.get(task.id) || [],
+        subtaskCounts: subtaskCounts.get(task.id) ?? { completed: 0, total: 0 },
+        labels: taskLabelsMap.get(task.id) || [],
+        externalLinks: taskExternalLinksMap.get(task.id) || [],
       })),
   }));
 
@@ -252,16 +325,18 @@ async function getTasksPage(
     .filter((task) => task.status === "archived")
     .map((task) => ({
       ...task,
-      labels: labelsByTask.get(task.id) || [],
-      externalLinks: externalLinksByTask.get(task.id) || [],
+      subtaskCounts: subtaskCounts.get(task.id) ?? { completed: 0, total: 0 },
+      labels: taskLabelsMap.get(task.id) || [],
+      externalLinks: taskExternalLinksMap.get(task.id) || [],
     }));
 
   const plannedTasks = paginatedTasks
     .filter((task) => task.status === "planned")
     .map((task) => ({
       ...task,
-      labels: labelsByTask.get(task.id) || [],
-      externalLinks: externalLinksByTask.get(task.id) || [],
+      subtaskCounts: subtaskCounts.get(task.id) ?? { completed: 0, total: 0 },
+      labels: taskLabelsMap.get(task.id) || [],
+      externalLinks: taskExternalLinksMap.get(task.id) || [],
     }));
 
   return {
@@ -274,6 +349,7 @@ async function getTasksPage(
       descriptionDeferred: project.descriptionDeferred,
       isPublic: project.isPublic,
       workspaceId: project.workspaceId,
+      backgroundVersion: project.backgroundVersion,
       columns,
       archivedTasks,
       plannedTasks,
@@ -304,4 +380,16 @@ export default function getTasks(
     (db) => getTasksPage(db, projectId, options),
     "Task list request took too long; retry later",
   );
+}
+
+function parseMetadata(raw: string | null): Record<string, unknown> | null {
+  if (!raw) return null;
+  try {
+    const value: unknown = JSON.parse(raw);
+    return value !== null && typeof value === "object" && !Array.isArray(value)
+      ? (value as Record<string, unknown>)
+      : null;
+  } catch {
+    return null;
+  }
 }

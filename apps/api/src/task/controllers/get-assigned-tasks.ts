@@ -18,6 +18,7 @@ import {
   workspaceUserTable,
 } from "../../database/schema";
 import { loadTaskDecorations } from "./load-task-decorations";
+import { boardDescription, descriptionDeferred } from "../description-pages";
 
 // Statuses the project board hides as well: planned tasks live in the backlog,
 // archived ones are history. Keeping them out bounds the payload to open work.
@@ -115,7 +116,8 @@ async function getAssignedTasks(
       id: taskTable.id,
       title: taskTable.title,
       number: taskTable.number,
-      description: taskTable.description,
+      description: boardDescription,
+      descriptionDeferred,
       status: taskTable.status,
       priority: taskTable.priority,
       startDate: taskTable.startDate,
