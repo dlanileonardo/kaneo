@@ -1896,8 +1896,7 @@
 			"invitations": "Einladungen",
 			"more": "Mehr",
 			"backToBoard": "Zurück zum Board",
-			"myTasks": "Meine Aufgaben",
-			"agenda": "Agenda"
+			"myTasks": "Meine Aufgaben"
 		},
 		"projectList": {
 			"viewProject": "Projekt ansehen",
@@ -2613,19 +2612,19 @@
 			"pageTitle": "Meine Aufgaben · {{view}}",
 			"title": "Meine Aufgaben",
 			"noMatches": "Keine passenden Aufgaben",
-			"noMatchesSubtitle": "Versuche eine andere Suche oder entferne die aktiven Filter."
+			"noMatchesSubtitle": "Versuche eine andere Suche oder entferne die aktiven Filter.",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"descriptionSearchLoading": "Vollständige Beschreibungen werden durchsucht…",
 		"descriptionSearchError": "Die Suche in Beschreibungen ist fehlgeschlagen. Ergebnisse sind möglicherweise unvollständig.",
 		"descriptionRetry": "Erneut versuchen",
 		"descriptionLoading": "Beschreibung wird geladen…",
 		"descriptionLoadError": "Die Beschreibung konnte nicht geladen werden. Versuche es erneut, um die aktuelle Version zu laden.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		},
 		"checklistProgress": "{{completed}} von {{total}} Checklistenpunkten abgeschlossen",
 		"customFields": {
 			"ariaLabel": "Custom fields"

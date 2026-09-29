@@ -1896,8 +1896,7 @@
 			"invitations": "निमंत्रण",
 			"more": "और",
 			"backToBoard": "बोर्ड पर वापस जाएँ",
-			"myTasks": "मेरे कार्य",
-			"agenda": "एजेंडा"
+			"myTasks": "मेरे कार्य"
 		},
 		"projectList": {
 			"viewProject": "प्रोजेक्ट देखें",
@@ -2613,19 +2612,19 @@
 			"pageTitle": "मेरे कार्य · {{view}}",
 			"title": "मेरे कार्य",
 			"noMatches": "कोई कार्य मेल नहीं खाता",
-			"noMatchesSubtitle": "कोई अन्य खोज आज़माएँ या सक्रिय फ़िल्टर हटाएँ।"
+			"noMatchesSubtitle": "कोई अन्य खोज आज़माएँ या सक्रिय फ़िल्टर हटाएँ।",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
 		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		},
 		"checklistProgress": "चेकलिस्ट के {{total}} में से {{completed}} आइटम पूरे हुए",
 		"customFields": {
 			"ariaLabel": "Custom fields"

@@ -1889,8 +1889,7 @@
 			"invitations": "Lời mời",
 			"more": "Thêm",
 			"backToBoard": "Quay lại bảng",
-			"myTasks": "Công việc của tôi",
-			"agenda": "Lịch"
+			"myTasks": "Công việc của tôi"
 		},
 		"projectList": {
 			"viewProject": "Xem dự án",
@@ -2601,19 +2600,19 @@
 			"pageTitle": "Công việc của tôi · {{view}}",
 			"title": "Công việc của tôi",
 			"noMatches": "Không có công việc nào phù hợp",
-			"noMatchesSubtitle": "Hãy thử tìm kiếm khác hoặc xóa các bộ lọc đang áp dụng."
+			"noMatchesSubtitle": "Hãy thử tìm kiếm khác hoặc xóa các bộ lọc đang áp dụng.",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
 		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		},
 		"checklistProgress": "Đã hoàn thành {{completed}} trên {{total}} mục trong danh sách kiểm tra",
 		"customFields": {
 			"ariaLabel": "Custom fields"

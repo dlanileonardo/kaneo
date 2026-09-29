@@ -1896,8 +1896,7 @@
 			"members": "Members",
 			"invitations": "Invitations",
 			"more": "More",
-			"backToBoard": "Back to board",
-			"agenda": "Agenda"
+			"backToBoard": "Back to board"
 		},
 		"projectList": {
 			"viewProject": "View Project",
@@ -2187,7 +2186,13 @@
 			"emptySubtitle": "Tasks assigned to you in any of your workspaces will show up here.",
 			"noMatches": "No tasks match",
 			"noMatchesSubtitle": "Try a different search or clear the active filters.",
-			"loadError": "Failed to load your tasks."
+			"loadError": "Failed to load your tasks.",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"common": {
 			"selectTask": "Select task",
@@ -2623,13 +2628,7 @@
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
-		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		}
+		"descriptionLoadError": "The description could not be loaded. Retry to load the current version."
 	},
 	"invitations": {
 		"email": {

@@ -1896,8 +1896,7 @@
 			"invitations": "Davetler",
 			"more": "Daha fazla",
 			"backToBoard": "Panoya dön",
-			"myTasks": "Görevlerim",
-			"agenda": "Gündem"
+			"myTasks": "Görevlerim"
 		},
 		"projectList": {
 			"viewProject": "Projeyi Görüntüle",
@@ -2613,19 +2612,19 @@
 			"pageTitle": "Görevlerim · {{view}}",
 			"title": "Görevlerim",
 			"noMatches": "Eşleşen görev yok",
-			"noMatchesSubtitle": "Farklı bir arama deneyin veya etkin filtreleri temizleyin."
+			"noMatchesSubtitle": "Farklı bir arama deneyin veya etkin filtreleri temizleyin.",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
 		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		},
 		"checklistProgress": "{{total}} kontrol listesi öğesinin {{completed}} tanesi tamamlandı",
 		"customFields": {
 			"ariaLabel": "Custom fields"

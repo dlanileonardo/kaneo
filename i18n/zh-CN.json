@@ -1889,8 +1889,7 @@
 			"invitations": "邀请",
 			"more": "更多",
 			"backToBoard": "返回看板",
-			"myTasks": "我的任务",
-			"agenda": "日程"
+			"myTasks": "我的任务"
 		},
 		"projectList": {
 			"viewProject": "查看项目",
@@ -2601,19 +2600,19 @@
 			"pageTitle": "我的任务 · {{view}}",
 			"title": "我的任务",
 			"noMatches": "没有匹配的任务",
-			"noMatchesSubtitle": "请尝试其他搜索或清除当前筛选条件。"
+			"noMatchesSubtitle": "请尝试其他搜索或清除当前筛选条件。",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
 		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		},
 		"checklistProgress": "已完成 {{completed}}/{{total}} 个清单项",
 		"customFields": {
 			"ariaLabel": "Custom fields"

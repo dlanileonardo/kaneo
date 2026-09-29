@@ -1,4 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
+import { endOfDay, isToday, startOfDay } from "date-fns";
 import { useCallback, useEffect, useMemo } from "react";
 import {
   type TaskViewContextValue,
@@ -12,6 +13,24 @@ import useProjectStore from "@/store/project";
 import { useUserPreferencesStore } from "@/store/user-preferences";
 import type Task from "@/types/task";
 
+/** Scope of the "My tasks" view: all, or a due-date bucket. */
+export type MyTasksScope = "all" | "overdue" | "today" | "upcoming";
+
+/** Tasks whose due date falls in the given bucket. */
+export function filterTasksByScope(tasks: Task[], scope: MyTasksScope): Task[] {
+  if (scope === "all") return tasks;
+  const today = startOfDay(new Date());
+  const endOfToday = endOfDay(new Date());
+  return tasks.filter((task) => {
+    if (!task.dueDate) return false;
+    const due = new Date(task.dueDate);
+    if (Number.isNaN(due.getTime())) return false;
+    if (scope === "overdue") return due < today;
+    if (scope === "today") return isToday(due);
+    return due > endOfToday;
+  });
+}
+
 /**
  * Everything the "My tasks" routes share: the assigned-tasks query folded into
  * a board, the per-task project lookup the task components read, the selected
@@ -23,6 +42,7 @@ import type Task from "@/types/task";
 export function useMyTasksView(
   taskId: string | undefined,
   workspaceId?: string,
+  scope: MyTasksScope = "all",
 ) {
   const navigate = useNavigate();
   const setProject = useProjectStore((state) => state.setProject);
@@ -35,10 +55,11 @@ export function useMyTasksView(
     setProject(undefined);
   }, [setProject]);
 
-  const assigned = useMemo(
-    () => (data ? buildAssignedBoard(data) : null),
-    [data],
-  );
+  const assigned = useMemo(() => {
+    if (!data) return null;
+    const scoped = filterTasksByScope(data.tasks, scope);
+    return buildAssignedBoard({ tasks: scoped, projects: data.projects });
+  }, [data, scope]);
 
   const getProjectSlug = useCallback(
     (task: Task) => assigned?.projectById.get(task.projectId)?.slug,

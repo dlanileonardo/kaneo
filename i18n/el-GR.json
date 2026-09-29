@@ -1896,8 +1896,7 @@
 			"invitations": "Προσκλήσεις",
 			"more": "Περισσότερα",
 			"backToBoard": "Επιστροφή στον πίνακα",
-			"myTasks": "Οι εργασίες μου",
-			"agenda": "Ατζέντα"
+			"myTasks": "Οι εργασίες μου"
 		},
 		"projectList": {
 			"viewProject": "Προβολή έργου",
@@ -2613,19 +2612,19 @@
 			"pageTitle": "Οι εργασίες μου · {{view}}",
 			"title": "Οι εργασίες μου",
 			"noMatches": "Καμία εργασία δεν ταιριάζει",
-			"noMatchesSubtitle": "Δοκιμάστε μια διαφορετική αναζήτηση ή καθαρίστε τα ενεργά φίλτρα."
+			"noMatchesSubtitle": "Δοκιμάστε μια διαφορετική αναζήτηση ή καθαρίστε τα ενεργά φίλτρα.",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
 		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		},
 		"checklistProgress": "Ολοκληρώθηκαν {{completed}} από {{total}} στοιχεία λίστας ελέγχου",
 		"customFields": {
 			"ariaLabel": "Custom fields"

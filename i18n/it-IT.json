@@ -1903,8 +1903,7 @@
 			"invitations": "Inviti",
 			"more": "Altro",
 			"backToBoard": "Torna alla board",
-			"myTasks": "Le mie attività",
-			"agenda": "Agenda"
+			"myTasks": "Le mie attività"
 		},
 		"projectList": {
 			"viewProject": "Vedi Progetto",
@@ -2625,19 +2624,19 @@
 			"pageTitle": "Le mie attività · {{view}}",
 			"title": "Le mie attività",
 			"noMatches": "Nessuna attività corrisponde",
-			"noMatchesSubtitle": "Prova una ricerca diversa o cancella i filtri attivi."
+			"noMatchesSubtitle": "Prova una ricerca diversa o cancella i filtri attivi.",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
 		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		},
 		"checklistProgress": "{{completed}} di {{total}} elementi della checklist completati",
 		"customFields": {
 			"ariaLabel": "Custom fields"

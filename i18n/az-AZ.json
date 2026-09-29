@@ -1896,8 +1896,7 @@
 			"members": "Üzvlər",
 			"invitations": "Dəvətlər",
 			"more": "Daha çox",
-			"backToBoard": "Lövhəyə qayıt",
-			"agenda": "Agenda"
+			"backToBoard": "Lövhəyə qayıt"
 		},
 		"projectList": {
 			"viewProject": "Layihəyə bax",
@@ -2524,7 +2523,13 @@
 			"emptySubtitle": "İş sahələrinizin hər hansı birində sizə təyin edilən tapşırıqlar burada görünəcək.",
 			"noMatches": "Uyğun tapşırıq yoxdur",
 			"noMatchesSubtitle": "Fərqli bir axtarış sınayın və ya aktiv filtrləri təmizləyin.",
-			"loadError": "Tapşırıqlarınız yüklənə bilmədi."
+			"loadError": "Tapşırıqlarınız yüklənə bilmədi.",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"kanban": {
 			"addTask": "Tapşırıq əlavə et"
@@ -2615,12 +2620,6 @@
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
 		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		},
 		"duplicate": {
 			"error": "Failed to duplicate task",
 			"success": "Task duplicated successfully",

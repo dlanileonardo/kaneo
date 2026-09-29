@@ -1896,8 +1896,7 @@
 			"invitations": "Покани",
 			"more": "Повеќе",
 			"backToBoard": "Назад на табла",
-			"myTasks": "Мои задачи",
-			"agenda": "Агенда"
+			"myTasks": "Мои задачи"
 		},
 		"projectList": {
 			"viewProject": "Погледни проект",
@@ -2613,19 +2612,19 @@
 			"pageTitle": "Мои задачи · {{view}}",
 			"title": "Мои задачи",
 			"noMatches": "Ниедна задача не одговара",
-			"noMatchesSubtitle": "Обидете се со друго пребарување или исчистете ги активните филтри."
+			"noMatchesSubtitle": "Обидете се со друго пребарување или исчистете ги активните филтри.",
+			"scope": {
+				"all": "All",
+				"overdue": "Overdue",
+				"today": "Today",
+				"upcoming": "Upcoming"
+			}
 		},
 		"descriptionSearchLoading": "Searching full descriptions…",
 		"descriptionSearchError": "Description search failed. Results may be incomplete.",
 		"descriptionRetry": "Retry",
 		"descriptionLoading": "Loading description…",
 		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
-		"agenda": {
-			"today": "Today",
-			"upcoming": "Upcoming",
-			"noToday": "Nothing due today. You are all caught up.",
-			"noUpcoming": "No upcoming tasks."
-		},
 		"checklistProgress": "Завршени се {{completed}} од {{total}} ставки од списокот",
 		"customFields": {
 			"ariaLabel": "Custom fields"

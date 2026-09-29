@@ -6,13 +6,14 @@ import BoardToolbar from "@/components/board/board-toolbar";
 import KanbanBoard from "@/components/kanban-board";
 import ListView from "@/components/list-view";
 import MyTasksLayout from "@/components/my-tasks/my-tasks-layout";
+import { ScopeSwitcher } from "@/components/my-tasks/scope-switcher";
 import PageTitle from "@/components/page-title";
 import TaskDetailsSheet from "@/components/task/task-details-sheet";
 import { TaskViewProvider } from "@/components/task/task-view-context";
 import { Input } from "@/components/ui/input";
 import { useBoardSort } from "@/hooks/use-board-sort";
 import useActiveWorkspace from "@/hooks/queries/workspace/use-active-workspace";
-import { useMyTasksView } from "@/hooks/use-my-tasks-view";
+import { type MyTasksScope, useMyTasksView } from "@/hooks/use-my-tasks-view";
 import { useTaskFiltersWithLabelsSupport } from "@/hooks/use-task-filters-with-labels-support";
 import { WorkspacePermissionScope } from "@/hooks/use-workspace-permission";
 import { MY_TASKS_BOARD_ID } from "@/lib/assigned-board";
@@ -40,6 +41,7 @@ function RouteComponent() {
   const { data: activeWorkspace } = useActiveWorkspace();
   const { viewMode, setViewMode } = useUserPreferencesStore();
   const [searchQuery, setSearchQuery] = useState("");
+  const [scope, setScope] = useState<MyTasksScope>("all");
   const { sort, setSort } = useBoardSort(MY_TASKS_BOARD_ID, DEFAULT_SORT);
   const {
     board,
@@ -50,7 +52,7 @@ function RouteComponent() {
     isLoading,
     isError,
     sheet,
-  } = useMyTasksView(taskId, activeWorkspace?.id);
+  } = useMyTasksView(taskId, activeWorkspace?.id, scope);
 
   const {
     filters,
@@ -89,14 +91,17 @@ function RouteComponent() {
     <MyTasksLayout
       activeView="board"
       headerActions={
-        <div className="relative w-[200px]">
-          <Search className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 text-muted-foreground" />
-          <Input
-            value={searchQuery}
-            onChange={(event) => setSearchQuery(event.target.value)}
-            placeholder={t("tasks:boardSearchPlaceholder")}
-            className="h-7.5 [&_[data-slot=input]]:h-7 [&_[data-slot=input]]:leading-7 [&_[data-slot=input]]:pl-8 [&_[data-slot=input]]:text-xs [&_[data-slot=input]]:placeholder:text-xs [&_[data-slot=input]]:placeholder:leading-7"
-          />
+        <div className="flex items-center gap-2">
+          <div className="relative w-[200px]">
+            <Search className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 text-muted-foreground" />
+            <Input
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder={t("tasks:boardSearchPlaceholder")}
+              className="h-7.5 [&_[data-slot=input]]:h-7 [&_[data-slot=input]]:leading-7 [&_[data-slot=input]]:pl-8 [&_[data-slot=input]]:text-xs [&_[data-slot=input]]:placeholder:text-xs [&_[data-slot=input]]:placeholder:leading-7"
+            />
+          </div>
+          <ScopeSwitcher scope={scope} onScopeChange={setScope} />
         </div>
       }
     >
