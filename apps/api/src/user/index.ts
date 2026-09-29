@@ -80,7 +80,7 @@ const listAssignedTasksRoute = createRoute({
   path: "/tasks",
   tags: ["Tasks"],
   summary: "List tasks assigned to me",
-  description: `Every open task assigned to the current user across all the workspaces they are a member of, with the projects and columns needed to display them. Planned and archived tasks, and tasks in archived projects, are left out. Tasks are ordered by due date, soonest first, and paged: \`limit\` defaults to ${MAX_ASSIGNED_TASKS}, which is also the maximum, so \`pagination.total\` tells when more pages exist. The caller is always the authenticated user.`,
+  description: `Every open task assigned to the current user across all the workspaces they are a member of, with the projects and columns needed to display them. When \`workspaceId\` is given, only tasks in that workspace are returned. Planned and archived tasks, and tasks in archived projects, are left out. Tasks are ordered by due date, soonest first, and paged: \`limit\` defaults to ${MAX_ASSIGNED_TASKS}, which is also the maximum, so \`pagination.total\` tells when more pages exist. The caller is always the authenticated user.`,
   request: { query: listAssignedTasksQuery },
   responses: {
     200: jsonResponse(

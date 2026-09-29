@@ -33,6 +33,7 @@ const HIDDEN_STATUSES = ["planned", "archived"];
 export const MAX_ASSIGNED_TASKS = 2000;
 
 type AssignedTasksOptions = {
+  workspaceId?: string;
   page?: number;
   limit?: number;
 };
@@ -59,6 +60,8 @@ type AssignedProject = {
 
 /**
  * Every open task assigned to `userId` across the workspaces they belong to.
+ * When `options.workspaceId` is given, only tasks in that workspace are
+ * returned.
  *
  * `assignee_id = me` is not enough on its own: leaving a workspace does not
  * clear assignments, so the membership check is part of the WHERE clause, the
@@ -90,6 +93,9 @@ async function getAssignedTasks(
     isNull(projectTable.archivedAt),
     notInArray(taskTable.status, HIDDEN_STATUSES),
     isMember,
+    options.workspaceId
+      ? eq(projectTable.workspaceId, options.workspaceId)
+      : undefined,
   );
   const page = options.page && options.page > 0 ? options.page : 1;
   const pageSize =

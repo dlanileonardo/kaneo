@@ -10,6 +10,7 @@ import PageTitle from "@/components/page-title";
 import TaskDetailsSheet from "@/components/task/task-details-sheet";
 import { TaskViewProvider } from "@/components/task/task-view-context";
 import { useIsMobile } from "@/hooks/use-mobile";
+import useActiveWorkspace from "@/hooks/queries/workspace/use-active-workspace";
 import { useMyTasksView } from "@/hooks/use-my-tasks-view";
 import { WorkspacePermissionScope } from "@/hooks/use-workspace-permission";
 import { toScheduledTasks } from "@/lib/task-schedule";
@@ -36,6 +37,7 @@ const MAX_LANES_MOBILE = 2;
 function RouteComponent() {
   const { t } = useTranslation();
   const { taskId } = Route.useSearch();
+  const { data: activeWorkspace } = useActiveWorkspace();
   const weekStartsOn = useUserPreferencesStore((state) => state.weekStartsOn);
   const isMobile = useIsMobile();
   const [visibleMonth, setVisibleMonth] = useState(() =>
@@ -49,7 +51,7 @@ function RouteComponent() {
     isError,
     sheet,
     openTask,
-  } = useMyTasksView(taskId);
+  } = useMyTasksView(taskId, activeWorkspace?.id);
 
   const scheduledTasks = useMemo(
     () =>

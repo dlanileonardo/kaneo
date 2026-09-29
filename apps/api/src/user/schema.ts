@@ -3,6 +3,7 @@ import { MAX_ASSIGNED_TASKS } from "../task/controllers/get-assigned-tasks";
 import { MAX_AVATAR_INPUT_CHARS } from "./avatar";
 
 export const listAssignedTasksQuery = z.object({
+  workspaceId: z.string().min(1).optional(),
   page: pagingNumber(1, 1_000_000).optional(),
   limit: pagingNumber(1, MAX_ASSIGNED_TASKS).optional(),
 });

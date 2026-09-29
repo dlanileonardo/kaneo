@@ -11,6 +11,7 @@ import TaskDetailsSheet from "@/components/task/task-details-sheet";
 import { TaskViewProvider } from "@/components/task/task-view-context";
 import { Input } from "@/components/ui/input";
 import { useBoardSort } from "@/hooks/use-board-sort";
+import useActiveWorkspace from "@/hooks/queries/workspace/use-active-workspace";
 import { useMyTasksView } from "@/hooks/use-my-tasks-view";
 import { useTaskFiltersWithLabelsSupport } from "@/hooks/use-task-filters-with-labels-support";
 import { WorkspacePermissionScope } from "@/hooks/use-workspace-permission";
@@ -36,6 +37,7 @@ const DEFAULT_SORT: SortConfig = { field: "dueDate", direction: "asc" };
 function RouteComponent() {
   const { t } = useTranslation();
   const { taskId } = Route.useSearch();
+  const { data: activeWorkspace } = useActiveWorkspace();
   const { viewMode, setViewMode } = useUserPreferencesStore();
   const [searchQuery, setSearchQuery] = useState("");
   const { sort, setSort } = useBoardSort(MY_TASKS_BOARD_ID, DEFAULT_SORT);
@@ -48,7 +50,7 @@ function RouteComponent() {
     isLoading,
     isError,
     sheet,
-  } = useMyTasksView(taskId);
+  } = useMyTasksView(taskId, activeWorkspace?.id);
 
   const {
     filters,

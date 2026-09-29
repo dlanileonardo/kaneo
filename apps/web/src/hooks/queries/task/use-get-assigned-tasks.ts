@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import getAssignedTasks from "@/fetchers/task/get-assigned-tasks";
 import { isUnauthorizedError } from "@/lib/http-error";
 
-export function useGetAssignedTasks() {
+export function useGetAssignedTasks(workspaceId?: string) {
   return useQuery({
-    queryKey: ["my-tasks"],
-    queryFn: getAssignedTasks,
+    queryKey: ["my-tasks", workspaceId ?? "all"],
+    queryFn: () => getAssignedTasks(workspaceId ? { workspaceId } : {}),
     // The client disables refetch-on-mount globally. Changes made elsewhere
     // only invalidate this query, so opening the page must fetch again.
     refetchOnMount: true,

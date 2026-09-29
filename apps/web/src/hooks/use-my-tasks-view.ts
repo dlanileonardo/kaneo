@@ -16,12 +16,18 @@ import type Task from "@/types/task";
  * Everything the "My tasks" routes share: the assigned-tasks query folded into
  * a board, the per-task project lookup the task components read, the selected
  * task for the details sheet, and the view shortcuts.
+ *
+ * When `workspaceId` is given, only tasks in that workspace are fetched; the
+ * "My tasks" view otherwise spans every workspace the user is a member of.
  */
-export function useMyTasksView(taskId: string | undefined) {
+export function useMyTasksView(
+  taskId: string | undefined,
+  workspaceId?: string,
+) {
   const navigate = useNavigate();
   const setProject = useProjectStore((state) => state.setProject);
   const setViewMode = useUserPreferencesStore((state) => state.setViewMode);
-  const { data, isLoading, isError } = useGetAssignedTasks();
+  const { data, isLoading, isError } = useGetAssignedTasks(workspaceId);
 
   // Cards fall back to the project in the store when no per-task lookup is
   // available; a stale project from the last board must not be that fallback.

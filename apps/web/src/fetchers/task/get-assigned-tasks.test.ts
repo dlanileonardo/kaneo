@@ -54,6 +54,31 @@ describe("getAssignedTasks", () => {
     expect(result.projects.map((project) => project.id)).toEqual(["p1"]);
   });
 
+  it("passes the workspace id through to every page when given", async () => {
+    mocks.get.mockImplementation(
+      async ({ query }: { query: { workspaceId?: string; page?: string } }) => {
+        switch (query.page) {
+          case undefined:
+            return page(1, 2, ["a"], ["p1"]);
+          case "2":
+            return page(2, 2, ["b"], ["p1"]);
+          default:
+            throw new Error(`unexpected page ${query.page}`);
+        }
+      },
+    );
+
+    const result = await getAssignedTasks({ workspaceId: "ws-1" });
+
+    expect(
+      mocks.get.mock.calls.map(([args]) => args as { query?: unknown }),
+    ).toEqual([
+      { query: { workspaceId: "ws-1" } },
+      { query: { workspaceId: "ws-1", page: "2" } },
+    ]);
+    expect(result.tasks.map((task) => task.id)).toEqual(["a", "b"]);
+  });
+
   it("walks every page and merges tasks and projects by id", async () => {
     mocks.get.mockImplementation(
       async ({ query }: { query: { page?: string } }) => {

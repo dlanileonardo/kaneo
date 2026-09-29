@@ -296,4 +296,62 @@ describe("API integration: tasks assigned to me", () => {
       },
     });
   });
+
+  it("filters tasks to the requested workspace when workspaceId is given", async () => {
+    const me = await createWorkspaceMember({ userName: "Me" });
+    const other = await createWorkspaceMember({
+      userName: "Other",
+      workspaceName: "Second workspace",
+    });
+    await addMember(other.workspace.id, me.user.id);
+
+    const first = await createProjectFixture({
+      workspaceId: me.workspace.id,
+      slug: "first",
+    });
+    const second = await createProjectFixture({
+      workspaceId: other.workspace.id,
+      slug: "second",
+    });
+
+    const inFirst = await insertTask({
+      projectId: first.project.id,
+      columnId: first.columns.todo.id,
+      userId: me.user.id,
+      title: "In first workspace",
+      status: "to-do",
+    });
+    const inSecond = await insertTask({
+      projectId: second.project.id,
+      columnId: second.columns.todo.id,
+      userId: me.user.id,
+      title: "In second workspace",
+      status: "to-do",
+    });
+
+    mockAuthenticatedSession(me.user);
+    const { app } = createApp();
+
+    const response = await app.request(
+      "/api/user/tasks?workspaceId=" + me.workspace.id,
+    );
+    expect(response.status).toBe(200);
+    const body = (await response.json()) as AssignedTasksResponse;
+
+    expect(body.data.tasks.map((task) => task.id)).toEqual([inFirst.id]);
+    expect(body.data.projects.map((project) => project.slug)).toEqual([
+      "first",
+    ]);
+    expect(body.pagination.total).toBe(1);
+
+    const secondResponse = await app.request(
+      "/api/user/tasks?workspaceId=" + other.workspace.id,
+    );
+    const secondBody = (await secondResponse.json()) as AssignedTasksResponse;
+    expect(secondBody.data.tasks.map((task) => task.id)).toEqual([inSecond.id]);
+    expect(secondBody.data.projects.map((project) => project.slug)).toEqual([
+      "second",
+    ]);
+    expect(secondBody.pagination.total).toBe(1);
+  });
 });
