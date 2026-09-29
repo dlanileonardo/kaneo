@@ -6,13 +6,12 @@ import CalendarToolbar from "@/components/calendar/calendar-toolbar";
 import MonthGrid from "@/components/calendar/month-grid";
 import { buildMonthWeeks } from "@/components/calendar/month-grid-model";
 import MyTasksLayout from "@/components/my-tasks/my-tasks-layout";
-import { ScopeSwitcher } from "@/components/my-tasks/scope-switcher";
 import PageTitle from "@/components/page-title";
 import TaskDetailsSheet from "@/components/task/task-details-sheet";
 import { TaskViewProvider } from "@/components/task/task-view-context";
 import { useIsMobile } from "@/hooks/use-mobile";
 import useActiveWorkspace from "@/hooks/queries/workspace/use-active-workspace";
-import { type MyTasksScope, useMyTasksView } from "@/hooks/use-my-tasks-view";
+import { useMyTasksView } from "@/hooks/use-my-tasks-view";
 import { WorkspacePermissionScope } from "@/hooks/use-workspace-permission";
 import { toScheduledTasks } from "@/lib/task-schedule";
 import { useUserPreferencesStore } from "@/store/user-preferences";
@@ -44,7 +43,6 @@ function RouteComponent() {
   const [visibleMonth, setVisibleMonth] = useState(() =>
     startOfMonth(new Date()),
   );
-  const [scope, setScope] = useState<MyTasksScope>("all");
   const {
     board,
     getProjectSlug,
@@ -53,7 +51,7 @@ function RouteComponent() {
     isError,
     sheet,
     openTask,
-  } = useMyTasksView(taskId, activeWorkspace?.id, scope);
+  } = useMyTasksView(taskId, activeWorkspace?.id);
 
   const scheduledTasks = useMemo(
     () =>
@@ -93,15 +91,12 @@ function RouteComponent() {
       )}
       <TaskViewProvider value={taskView}>
         <div className="flex h-full min-h-0 flex-col bg-background">
-          <div className="flex items-center justify-between gap-2 px-2 pt-2">
-            <ScopeSwitcher scope={scope} onScopeChange={setScope} />
-            <CalendarToolbar
-              visibleMonth={visibleMonth}
-              onPreviousMonth={handlePreviousMonth}
-              onNextMonth={handleNextMonth}
-              onToday={handleToday}
-            />
-          </div>
+          <CalendarToolbar
+            visibleMonth={visibleMonth}
+            onPreviousMonth={handlePreviousMonth}
+            onNextMonth={handleNextMonth}
+            onToday={handleToday}
+          />
 
           {isLoading ? (
             <CalendarNotice title={t("common:empty.loading")} tone="muted" />
