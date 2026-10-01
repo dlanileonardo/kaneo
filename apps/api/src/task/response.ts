@@ -37,6 +37,18 @@ export const taskSchema = z
 
 export const taskWithAssigneeSchema = taskSchema
   .extend({
+    subtaskCounts: z
+      .object({ completed: z.number(), total: z.number() })
+      .optional(),
+    parentSubtaskCounts: z
+      .array(
+        z.object({
+          taskId: z.string(),
+          completed: z.number(),
+          total: z.number(),
+        }),
+      )
+      .optional(),
     assigneeName: z.string().nullable(),
     assigneeId: z.string().nullable(),
   })
@@ -145,7 +157,29 @@ export const boardSchema = z
         plannedTasks: z.array(boardTaskSchema),
       })
       .openapi("Board"),
-    pagination: paginationSchema,
+    pagination: z
+      .object({
+        total: z.number(),
+        page: z.number(),
+        pageSize: z.number(),
+        totalPages: z.number(),
+        relatedPage: z.number(),
+        relatedPageSize: z.number(),
+        relatedTotalPages: z.number(),
+        relatedRevision: z.string().optional().openapi({
+          description:
+            "Public board labels and external links revision for this task page. Restart pagination if it changes during related-page continuations.",
+        }),
+        revision: z.string().optional().openapi({
+          description:
+            "Public board content, membership and ordering revision, including related records and visible subtask progress. Restart pagination if it changes between task or related pages.",
+        }),
+      })
+      .openapi({
+        description:
+          "Always paginated: 50 tasks by default, at most 100 per page. Continue through totalPages to retrieve all tasks. For each task page, follow relatedPage through relatedTotalPages to retrieve all labels, external links and columns (100 related rows per kind per request, plus up to 100 columns needed to represent the tasks).",
+      })
+      .openapi("BoardPagination"),
   })
   .openapi("BoardResponse");
 

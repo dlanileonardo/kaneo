@@ -49,7 +49,7 @@
             "type": "object",
             "properties": {
               "pagination": {
-                "$ref": "#/components/schemas/Pagination"
+                "$ref": "#/components/schemas/BoardPagination"
               }
             },
             "required": [
@@ -312,12 +312,11 @@
           "updatedAt"
         ]
       },
-      "Pagination": {
+      "BoardPagination": {
         "type": "object",
         "properties": {
           "total": {
-            "type": "number",
-            "description": "How many rows match in total, across all pages."
+            "type": "number"
           },
           "page": {
             "type": "number"
@@ -326,16 +325,36 @@
             "type": "number"
           },
           "totalPages": {
-            "type": "number",
-            "description": "At least 1."
+            "type": "number"
+          },
+          "relatedPage": {
+            "type": "number"
+          },
+          "relatedPageSize": {
+            "type": "number"
+          },
+          "relatedTotalPages": {
+            "type": "number"
+          },
+          "relatedRevision": {
+            "type": "string",
+            "description": "Public board labels and external links revision for this task page. Restart pagination if it changes during related-page continuations."
+          },
+          "revision": {
+            "type": "string",
+            "description": "Public board content, membership and ordering revision, including related records and visible subtask progress. Restart pagination if it changes between task or related pages."
           }
         },
         "required": [
           "total",
           "page",
           "pageSize",
-          "totalPages"
-        ]
+          "totalPages",
+          "relatedPage",
+          "relatedPageSize",
+          "relatedTotalPages"
+        ],
+        "description": "Always paginated: 50 tasks by default, at most 100 per page. Continue through totalPages to retrieve all tasks. For each task page, follow relatedPage through relatedTotalPages to retrieve all labels, external links and columns (100 related rows per kind per request, plus up to 100 columns needed to represent the tasks)."
       },
       "Board": {
         "type": "object",
@@ -878,7 +897,7 @@
             "$ref": "#/components/schemas/Board"
           },
           "pagination": {
-            "$ref": "#/components/schemas/Pagination"
+            "$ref": "#/components/schemas/BoardPagination"
           }
         },
         "required": [
@@ -899,6 +918,47 @@
         "required": [
           "success",
           "updatedCount"
+        ]
+      },
+      "TaskImageUpload": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Object key to send back to the finalize route."
+          },
+          "uploadUrl": {
+            "type": "string",
+            "description": "Presigned URL to PUT the image bytes to."
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Headers that must accompany the upload request, including Content-Type."
+          }
+        },
+        "required": [
+          "key",
+          "uploadUrl",
+          "headers"
+        ]
+      },
+      "TaskImageAsset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "description": "Where the stored image can be read back from."
+          }
+        },
+        "required": [
+          "id",
+          "url"
         ]
       },
       "Task": {
@@ -1012,6 +1072,43 @@
           {
             "type": "object",
             "properties": {
+              "subtaskCounts": {
+                "type": "object",
+                "properties": {
+                  "completed": {
+                    "type": "number"
+                  },
+                  "total": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "completed",
+                  "total"
+                ]
+              },
+              "parentSubtaskCounts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "taskId": {
+                      "type": "string"
+                    },
+                    "completed": {
+                      "type": "number"
+                    },
+                    "total": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "taskId",
+                    "completed",
+                    "total"
+                  ]
+                }
+              },
               "assigneeName": {
                 "type": [
                   "string",
@@ -1199,47 +1296,6 @@
           "successful",
           "failed",
           "tasks"
-        ]
-      },
-      "TaskImageUpload": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "Object key to send back to the finalize route."
-          },
-          "uploadUrl": {
-            "type": "string",
-            "description": "Presigned URL to PUT the image bytes to."
-          },
-          "headers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Headers that must accompany the upload request, including Content-Type."
-          }
-        },
-        "required": [
-          "key",
-          "uploadUrl",
-          "headers"
-        ]
-      },
-      "TaskImageAsset": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string",
-            "description": "Where the stored image can be read back from."
-          }
-        },
-        "required": [
-          "id",
-          "url"
         ]
       },
       "Column": {
@@ -4000,6 +4056,31 @@
           "icon",
           "isFinal",
           "position"
+        ]
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "description": "How many rows match in total, across all pages."
+          },
+          "page": {
+            "type": "number"
+          },
+          "pageSize": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number",
+            "description": "At least 1."
+          }
+        },
+        "required": [
+          "total",
+          "page",
+          "pageSize",
+          "totalPages"
         ]
       },
       "UserAvatar": {
@@ -8651,6 +8732,401 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Tasks changed projects; retry the operation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task/draft-upload/{projectId}": {
+      "post": {
+        "operationId": "stageTaskAssetUpload",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Stage a task attachment",
+        "description": "Upload an attachment before submitting a task. Staged assets are private to the uploader and expire after 24 hours.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "projectId",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filename": {
+                    "type": "string"
+                  },
+                  "contentType": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "number"
+                  },
+                  "surface": {
+                    "type": "string",
+                    "enum": [
+                      "description"
+                    ]
+                  }
+                },
+                "required": [
+                  "filename",
+                  "contentType",
+                  "size",
+                  "surface"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Presigned upload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskImageUpload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid upload",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid credentials"
+          },
+          "403": {
+            "description": "Missing task:create permission",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Storage unavailable",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task/draft-upload/{projectId}/finalize": {
+      "post": {
+        "operationId": "finalizeStagedTaskAsset",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Finalize a staged task attachment",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "projectId",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "description": "The key returned when the URL was issued."
+                  },
+                  "filename": {
+                    "type": "string"
+                  },
+                  "contentType": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "number"
+                  },
+                  "surface": {
+                    "type": "string",
+                    "enum": [
+                      "description"
+                    ]
+                  }
+                },
+                "required": [
+                  "key",
+                  "filename",
+                  "contentType",
+                  "size",
+                  "surface"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Staged attachment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskImageAsset"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid upload",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid credentials"
+          },
+          "403": {
+            "description": "Missing task:create permission",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Upload already attached",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Storage unavailable",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task/reorder": {
+      "post": {
+        "operationId": "reorderTasks",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Reorder or move cards",
+        "description": "Atomically update positions and optional column status for cards in one project. Other task fields are preserved.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "expectedTasks": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "position": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "minimum": 0,
+                          "maximum": 2147483646
+                        },
+                        "status": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "position",
+                        "status"
+                      ]
+                    },
+                    "description": "Previous complete contents of the affected columns; stale snapshots return 409"
+                  },
+                  "tasks": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "position": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 2147483646
+                        },
+                        "status": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "position"
+                      ]
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "projectId",
+                  "tasks"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated card positions and statuses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "number"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "position",
+                      "status"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid positions or column",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid credentials"
+          },
+          "403": {
+            "description": "Missing task:update permission",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tasks do not belong to the project",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Board changed or task moved; refresh before reordering",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -8709,6 +9185,13 @@
                   "userId": {
                     "type": "string",
                     "description": "Assignee, if any."
+                  },
+                  "draftAssetIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 100
                   },
                   "customFields": {
                     "type": "array",
@@ -8883,6 +9366,96 @@
         }
       }
     },
+    "/task/by-ticket-id/{ticketId}": {
+      "get": {
+        "operationId": "getTaskByTicketId",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Get task by ticket ID",
+        "description": "Get a single task by its project key and number, such as KAN-12. If the ticket ID matches multiple accessible tasks, provide workspaceId or projectId to select one.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 128,
+              "description": "Project key and task number, e.g. KAN-12."
+            },
+            "required": true,
+            "description": "Project key and task number, e.g. KAN-12.",
+            "name": "ticketId",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Select a workspace if the ticket ID exists in more than one."
+            },
+            "required": false,
+            "description": "Select a workspace if the ticket ID exists in more than one.",
+            "name": "workspaceId",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Select a project if the ticket ID exists more than once."
+            },
+            "required": false,
+            "description": "Select a project if the ticket ID exists more than once.",
+            "name": "projectId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskWithAssignee"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ticket ID",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid credentials"
+          },
+          "404": {
+            "description": "No accessible task has this ticket ID",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Ticket ID matches multiple accessible tasks",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/task/{id}": {
       "get": {
         "operationId": "getTask",
@@ -8890,7 +9463,7 @@
           "Tasks"
         ],
         "summary": "Get task",
-        "description": "Get a single task by ID, with its assignee's name resolved.",
+        "description": "Get a single task by ID, with its assignee name. The board view omits descriptions above 64 KiB and includes task and same-project parent subtask progress.",
         "parameters": [
           {
             "schema": {
@@ -8899,6 +9472,18 @@
             "required": true,
             "name": "id",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "detail",
+                "board"
+              ]
+            },
+            "required": false,
+            "name": "view",
+            "in": "query"
           }
         ],
         "responses": {
@@ -9096,6 +9681,16 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Task changed projects; retry the operation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -9176,6 +9771,16 @@
           },
           "404": {
             "description": "Task or destination project not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Task or project moved concurrently; retry the move",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13099,7 +13704,7 @@
             "description": "Missing or invalid credentials"
           },
           "403": {
-            "description": "No workspace access, or missing task:create permission",
+            "description": "No workspace access, or missing task:create or task:update permission",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13662,7 +14267,7 @@
             "description": "Missing or invalid credentials"
           },
           "403": {
-            "description": "No workspace access, or missing task:create permission",
+            "description": "No workspace access, or missing task:create or task:update permission",
             "content": {
               "text/plain": {
                 "schema": {

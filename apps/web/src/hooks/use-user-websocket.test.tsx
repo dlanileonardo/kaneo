@@ -21,6 +21,11 @@ vi.mock("@/lib/auth-client", () => ({
   },
 }));
 
+vi.mock("@tanstack/react-router", () => ({
+  useLocation: () => ({ pathname: "/dashboard" }),
+  useNavigate: () => vi.fn(),
+}));
+
 class FakeWebSocket {
   static OPEN = 1;
   static instances: FakeWebSocket[] = [];
