@@ -261,6 +261,12 @@ export const auth = betterAuth({
       // GitHub integration account link. The local email is verified first
       // (requireLocalEmailVerified), which keeps linking safe.
       trustedProviders: ["github", "google", "discord"],
+      // The GitHub App account link exists to sync repos/issues, not to assert
+      // identity: the GitHub email is often a different address than the Kaneo
+      // account email. The local account must still have a verified email
+      // (requireLocalEmailVerified above), so allowing a different provider
+      // email does not let an unverified account be taken over.
+      allowDifferentEmails: true,
       // Only link to an existing local account after its email has been
       // verified. Without this check, an attacker could pre-register a victim's
       // email with a password account and retain access after the victim signs
