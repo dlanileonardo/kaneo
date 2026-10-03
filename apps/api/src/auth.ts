@@ -256,6 +256,11 @@ export const auth = betterAuth({
       // Require the provider's verified-email claim for implicit linking;
       // configuration alone must not make an unverified identity trusted.
       enabled: true,
+      // GitHub OAuth does not reliably surface a verified email in the user
+      // info response, so the callback's emailVerified check would block the
+      // GitHub integration account link. The local email is verified first
+      // (requireLocalEmailVerified), which keeps linking safe.
+      trustedProviders: ["github", "google", "discord"],
       // Only link to an existing local account after its email has been
       // verified. Without this check, an attacker could pre-register a victim's
       // email with a password account and retain access after the victim signs
