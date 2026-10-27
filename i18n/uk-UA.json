@@ -10,8 +10,7 @@
 			"markAllRead": "Позначити все як прочитане",
 			"remove": "Прибрати",
 			"reset": "Скинути",
-			"filter": "Фільтр",
-			"clearAllFilters": "Очистити всі фільтри"
+			"filter": "Фільтр"
 		},
 		"a11y": {
 			"toggleSidebar": "Перемикач бічної панелі"
@@ -123,7 +122,6 @@
 				"startDate": "Дата початку",
 				"dueDate": "Дата завершення",
 				"clearStartDate": "Очистити дату початку",
-				"clearDueDate": "Очистити дату завершення",
 				"assign": "Призначити",
 				"assignUnassigned": "Не призначено",
 				"assignUnassignedTitle": "Не призначено",
@@ -149,16 +147,22 @@
 					"amber": "Бурштин",
 					"terracotta": "Теракота",
 					"rose": "Троянда",
-					"crimson": "Багряний"
+					"crimson": "Багряний",
+					"lagoon": "Лагуна",
+					"ocean": "Океан",
+					"orchid": "Орхідея",
+					"sky": "Небо"
 				},
 				"statusLoadError": "Project statuses couldn’t be loaded."
 			}
 		},
-		"boolean": {
-			"false": "False",
-			"notSet": "Not Set",
-			"true": "True",
-			"undefined": "Undefined"
+		"editor": {
+			"link": {
+				"label": "URL посилання",
+				"placeholder": "Вставте або введіть посилання…",
+				"apply": "Застосувати посилання",
+				"remove": "Видалити посилання"
+			}
 		}
 	},
 	"auth": {
@@ -544,7 +548,8 @@
 				"title": "Увійдіть, щоб підключити пристрій",
 				"description": "Одразу після входу ви повернетеся сюди, щоб підтвердити його.",
 				"submit": "Увійти"
-			}
+			},
+			"openApp": "Open Kaneo"
 		},
 		"mcp": {
 			"authorize": {
@@ -764,6 +769,10 @@
 			"board": "Дошка",
 			"list": "Список",
 			"gantt": "Ґант",
+			"priorityIcons": "Значки пріоритету",
+			"priorityIconsDescription": "Як пріоритет завдання виглядає на картках, у рядках і меню.",
+			"priorityIconsMarks": "Позначки",
+			"priorityIconsClassic": "Класичні",
 			"sidebarDefault": "Тримати бічну панель відкритою",
 			"sidebarDefaultDescription": "Починати з розгорнутою бічною панеллю.",
 			"displayOptions": "Деталі завдань",
@@ -776,6 +785,10 @@
 			"projectBackgrounds": "Project backgrounds",
 			"projectBackgroundsDescription": "Показувати зображення, яке проєкт задає за своєю дошкою.",
 			"advancedTitle": "Додатково"
+		},
+		"managedProfile": {
+			"note": "Керується вашою організацією.",
+			"edit": "Редагувати в {{provider}}"
 		},
 		"developerPage": {
 			"pageTitle": "API-ключі",
@@ -1535,12 +1548,10 @@
 			"createSuccess": "Custom field created.",
 			"creating": "Creating...",
 			"defaultLabel": "Default",
-			"defaultValuePlaceholder": "Default value",
 			"deleteError": "Failed to delete custom field.",
 			"deleteSuccess": "Custom field deleted.",
 			"deleting": "Deleting...",
 			"namePlaceholder": "Field name",
-			"noOptionsPlaceholder": "No options",
 			"required": "Required",
 			"types": {
 				"boolean": "Прапорець",
@@ -1550,7 +1561,6 @@
 				"text": "Text",
 				"multiselect": "Випадний список, кілька значень"
 			},
-			"availableOptions": "Available options",
 			"clearDefault": "Очистити значення за замовчуванням",
 			"moreOptions": "+{{hiddenCount}} more",
 			"reorderError": "Failed to reorder fields",
@@ -1583,6 +1593,8 @@
 			"noDefault": "Без значення за замовчуванням",
 			"optionsLabel": "Варіанти",
 			"removeOptionAria": "Видалити {{option}}",
+			"hideOptionAria": "Приховати {{option}} з нових виборів",
+			"showOptionAria": "Знову пропонувати {{option}} для нових виборів",
 			"renameOptionAria": "Перейменувати {{option}}",
 			"requiredDescription": "Кожне завдання завжди має значення.",
 			"save": "Зберегти",
@@ -1891,7 +1903,11 @@
 				"expiredDescription": "Subscribe to keep creating and editing.",
 				"viewPlans": "View plans"
 			},
-			"openFailed": "Couldn't open billing for this workspace"
+			"openFailed": "Couldn't open billing for this workspace",
+			"checkoutSuccess": {
+				"title": "Дякуємо за підписку",
+				"description": "Платіж отримано. План нижче оновиться, щойно його буде підтверджено."
+			}
 		},
 		"syncRules": {
 			"addLabel": "Add label",
@@ -2524,36 +2540,124 @@
 		"projectSettings": {
 			"projectLabel": "Проєкт"
 		},
-		"keyboardShortcuts": {
-			"title": "Гарячі клавіші",
-			"subtitle": "Прискорте роботу за допомогою гарячих клавіш",
-			"searchPlaceholder": "Пошук гарячих клавіш...",
-			"footer": "Натисніть <kbd>Escape</kbd>, щоб закрити",
+		"shortcuts": {
 			"categories": {
 				"general": "Загальні",
+				"navigation": "Навігація",
 				"create": "Створення",
 				"views": "Перегляди",
-				"navigation": "Навігація",
-				"quickSelect": "Швидкий вибір (у спливаючих вікнах)"
+				"tasks": "Завдання",
+				"list": "Дошка і список",
+				"inbox": "Вхідні",
+				"filters": "Фільтри",
+				"editor": "Редактор"
 			},
 			"items": {
-				"openCommandPalette": "Відкрити командну палітру",
-				"globalSearch": "Глобальний пошук",
+				"openCommandMenu": "Відкрити командну палітру",
+				"openSearch": "Глобальний пошук",
+				"openShortcuts": "Показати гарячі клавіші",
+				"submit": "Зберегти або надіслати",
+				"back": "Закрити модальне/спливаюче вікно",
+				"switchWorkspace": "Змінити робочий простір",
+				"logOut": "Вийти",
+				"showDisplayOptions": "Параметри відображення",
+				"dismissToasts": "Закрити всі сповіщення",
 				"toggleSidebar": "Перемикач бічної панелі",
-				"showShortcuts": "Показати гарячі клавіші",
-				"closeModal": "Закрити модальне/спливаюче вікно",
+				"goToHome": "Перейти на головну",
+				"goToInbox": "Перейти до вхідних",
+				"goToMyTasks": "Перейти до моїх завдань",
+				"goToProjects": "Перейти до проєктів",
+				"goToSettings": "Перейти до налаштувань",
+				"goToTasks": "Перейти до завдань",
+				"goToBacklog": "Перейти до беклогу",
+				"goToProject": "Перейти до проєкту 1–9",
+				"openTask": "Відкрити завдання",
+				"openProject": "Відкрити проєкт",
 				"createTask": "Створити завдання",
 				"createProject": "Створити проєкт",
-				"createWorkspace": "Створити робочий простір",
-				"boardView": "Перемкнути на вигляд дошки",
-				"listView": "Перемкнути на вигляд списку",
-				"backlogView": "Перемкнути на вигляд беклогу",
-				"nextTask": "Наступне завдання",
-				"prevTask": "Попереднє завдання",
-				"openTask": "Відкрити обране завдання",
-				"quickSelectNumber": "Обрати варіант за номером",
-				"calendarView": "Перемкнути на вигляд календаря"
-			}
+				"toggleLayout": "Перемкнути дошку і список",
+				"deleteTask": "Видалити завдання",
+				"copyTaskUrl": "Копіювати посилання на завдання",
+				"copyBranchName": "Копіювати гілку завдання",
+				"nextTask": "Наступний елемент",
+				"previousTask": "Попередній елемент",
+				"openFocusedTask": "Відкрити вибраний елемент",
+				"selectAll": "Вибрати все",
+				"clearSelection": "Зняти виділення",
+				"changeStatus": "Змінити статус",
+				"changePriority": "Змінити пріоритет",
+				"assignTask": "Призначити",
+				"assignToMe": "Призначити мені",
+				"changeLabels": "Змінити мітки",
+				"setDueDate": "Встановити термін",
+				"removeDueDate": "Прибрати термін",
+				"renameTask": "Перейменувати",
+				"editDescription": "Редагувати опис",
+				"commentOnTask": "Коментувати",
+				"moveToProject": "Перемістити до іншого проєкту",
+				"createSubtask": "Створити підзавдання",
+				"setParent": "Задати батьківське завдання",
+				"openParent": "Відкрити батьківське завдання",
+				"openSubtask": "Відкрити підзавдання",
+				"markBlockedBy": "Позначити як заблоковане",
+				"markBlocking": "Позначити як блокувальне",
+				"markRelated": "Позначити як пов'язане",
+				"addLink": "Додати посилання",
+				"toggleResources": "Показати або сховати ресурси",
+				"copyTaskId": "Копіювати ID завдання",
+				"copyTaskTitle": "Копіювати назву завдання",
+				"copyAsMarkdown": "Копіювати як Markdown",
+				"peekTask": "Попередній перегляд вибраного завдання",
+				"selectTask": "Вибрати завдання",
+				"selectGroup": "Вибрати все в групі",
+				"copyPageUrl": "Копіювати URL сторінки",
+				"focusRight": "Наступна колонка",
+				"focusLeft": "Попередня колонка",
+				"moveTaskTop": "Перемістити на початок групи",
+				"moveTaskUp": "Підняти на одну позицію",
+				"moveTaskDown": "Опустити на одну позицію",
+				"moveTaskBottom": "Перемістити в кінець групи",
+				"moveTaskLeft": "Перемістити в попередню колонку",
+				"moveTaskRight": "Перемістити в наступну колонку",
+				"toggleGroup": "Згорнути або розгорнути групу",
+				"toggleAllGroups": "Згорнути або розгорнути всі групи",
+				"deleteNotification": "Видалити сповіщення",
+				"deleteReadNotifications": "Видалити всі прочитані сповіщення",
+				"toggleNotificationRead": "Позначити як прочитане чи непрочитане",
+				"markAllNotificationsRead": "Позначити всі як прочитані",
+				"addFilter": "Додати фільтр",
+				"clearAllFilters": "Скинути всі фільтри",
+				"clearLastFilter": "Скинути останній фільтр",
+				"editorBold": "Жирний",
+				"editorItalic": "Курсив",
+				"editorUnderline": "Підкреслений",
+				"editorStrike": "Закреслений",
+				"editorAttach": "Прикріпити зображення або файл",
+				"editorInlineCode": "Вбудований код",
+				"editorLink": "Перетворити текст на посилання",
+				"editorQuote": "Цитата",
+				"editorParagraph": "Звичайний текст",
+				"editorHeading1": "Заголовок 1",
+				"editorHeading2": "Заголовок 2",
+				"editorHeading3": "Заголовок 3",
+				"editorChecklist": "Чек-лист",
+				"editorToggleChecklist": "Позначити пункт чек-листа",
+				"editorBulletList": "Маркований список",
+				"editorNumberedList": "Нумерований список",
+				"editorCodeBlock": "Блок коду",
+				"editorUndo": "Скасувати",
+				"editorRedo": "Повторити"
+			},
+			"title": "Гарячі клавіші",
+			"searchPlaceholder": "Пошук за дією або клавішею",
+			"results_one": "{{count}} результат",
+			"results_few": "{{count}} результати",
+			"results_many": "{{count}} результатів",
+			"results_other": "{{count}} результату",
+			"noResults": "Немає відповідних скорочень",
+			"then": "потім",
+			"or": "або",
+			"thenEllipsis": "потім…"
 		}
 	},
 	"notifications": {
@@ -2637,7 +2741,9 @@
 			"today": "Today",
 			"unread": "Unread",
 			"loadError": "Notifications couldn't be loaded.",
-			"taskLoadError": "This task couldn’t be loaded."
+			"taskLoadError": "This task couldn’t be loaded.",
+			"actionError": "Не вдалося оновити вхідні. Спробуйте ще раз.",
+			"readCleared": "Прочитані сповіщення видалено"
 		}
 	},
 	"activity": {
@@ -2671,7 +2777,6 @@
 				"imageUploaded": "Зображення завантажено",
 				"fileAttached": "Файл прикріплено",
 				"failedToUploadFile": "Не вдалося завантажити файл",
-				"enterUrl": "Введіть URL",
 				"plaintext": "Звичайний текст",
 				"autoDetect": "Автовизначення",
 				"slashGroupText": "Текст",
@@ -2774,7 +2879,6 @@
 			"high": "Високий",
 			"urgent": "Терміновий"
 		},
-		"boardSearchPlaceholder": "Пошук тікетів...",
 		"view": {
 			"board": "Дошка",
 			"list": "Список",
@@ -2803,7 +2907,6 @@
 				"ariaLabel": "Редактор опису завдання",
 				"placeholder": "Напишіть опис...",
 				"previewImage": "Попередній перегляд зображення",
-				"enterUrl": "Введіть URL",
 				"autoDetect": "Автовизначення",
 				"copyCode": "Копіювати код",
 				"copy": "Копіювати",
@@ -2907,9 +3010,7 @@
 				"saving": "Saving…",
 				"saveFailed": "Changes could not be saved",
 				"retrySave": "Retry"
-			},
-			"customFieldUpdated": "Field updated",
-			"selectOption": "Select option"
+			}
 		},
 		"entity": {
 			"task": "Завдання"
@@ -2930,7 +3031,9 @@
 				"blocks": "блокує",
 				"related": "пов'язано з",
 				"blocked_by": "заблоковано"
-			}
+			},
+			"blockedBy": "Блокується",
+			"parentPlaceholder": "Задати батьківське завдання…"
 		},
 		"subtasks": {
 			"title": "Підзавдання",
@@ -2950,13 +3053,16 @@
 		"properties": {
 			"title": "Властивості",
 			"labels": "Мітки",
+			"addLabels": "Додати мітки",
 			"copyTaskLink": "Копіювати посилання на завдання",
 			"copyTaskBranch": "Копіювати гілку завдання",
 			"taskLinkCopied": "Посилання на завдання скопійовано",
 			"taskBranchCopied": "Назву гілки скопійовано",
 			"start": "Початок",
 			"startDate": "Дата початку",
-			"noDate": "Немає дати"
+			"noDate": "Немає дати",
+			"dates": "Дати",
+			"project": "Проєкт"
 		},
 		"move": {
 			"title": "Перемістити завдання",
@@ -2981,12 +3087,10 @@
 				"updateError": "Не вдалося оновити пріоритет завдання"
 			},
 			"dueDate": {
-				"updateSuccess": "Дату завершення завдання успішно оновлено",
 				"updateError": "Не вдалося оновити дату завершення завдання",
 				"clear": "Очистити дату"
 			},
 			"startDate": {
-				"updateSuccess": "Дату початку завдання успішно оновлено",
 				"updateError": "Не вдалося оновити дату початку завдання",
 				"clear": "Очистити дату початку"
 			},
@@ -2995,8 +3099,6 @@
 				"empty": "Мітки не знайдено",
 				"create": "Створити «{{name}}»",
 				"chooseColor": "Оберіть колір",
-				"addSuccess": "Мітку додано",
-				"removeSuccess": "Мітку видалено",
 				"updateError": "Не вдалося оновити мітку",
 				"createSuccess": "Мітку створено та додано",
 				"createError": "Не вдалося створити мітку",
@@ -3009,9 +3111,48 @@
 					"amber": "Бурштин",
 					"terracotta": "Теракота",
 					"rose": "Троянда",
-					"crimson": "Багряний"
+					"crimson": "Багряний",
+					"lagoon": "Лагуна",
+					"ocean": "Океан",
+					"orchid": "Орхідея",
+					"sky": "Небо"
 				},
 				"editLabels": "Редагувати мітки"
+			},
+			"recurrence": {
+				"updateError": "Не вдалося оновити повторення завдання",
+				"every": "Кожні",
+				"hint": "Коли це завдання буде виконано, буде створено наступне.",
+				"interval": "Інтервал",
+				"onDays": "У ці дні",
+				"pattern": {
+					"daily": "Щодня",
+					"monthly": "Щомісяця",
+					"periodically": "Періодично",
+					"weekly": "Щотижня",
+					"yearly": "Щороку"
+				},
+				"repeats": "Повторення",
+				"toggle": "Повторювати",
+				"unit": {
+					"days_few": "дні",
+					"days_many": "днів",
+					"days_one": "день",
+					"days_other": "дня",
+					"label": "Одиниця",
+					"months_few": "місяці",
+					"months_many": "місяців",
+					"months_one": "місяць",
+					"months_other": "місяця",
+					"weeks_few": "тижні",
+					"weeks_many": "тижнів",
+					"weeks_one": "тиждень",
+					"weeks_other": "тижня",
+					"years_few": "роки",
+					"years_many": "років",
+					"years_one": "рік",
+					"years_other": "року"
+				}
 			}
 		},
 		"backlog": {
@@ -3023,26 +3164,18 @@
 			"moveAllTooltip": "Перемістити всі заплановані до «До виконання»",
 			"moveAll": "Перемістити всі",
 			"addTask": "Додати завдання",
-			"filter": "Фільтр",
-			"addFilter": "Додати фільтр...",
 			"sections": {
 				"planned": "Заплановані",
 				"archived": "Архівовані"
 			},
 			"noTasksInSection": "Немає завдань у розділі «{{section}}»",
 			"filters": {
-				"priority": "Пріоритет: {{name}}",
-				"assignee": "Виконавець: {{name}}",
-				"due": "Термін: {{date}}",
-				"label": "Мітка: {{name}}",
 				"dueThisWeek": "Термін цього тижня",
 				"dueNextWeek": "Термін наступного тижня",
 				"noDueDate": "Без дати завершення"
 			}
 		},
 		"sort": {
-			"label": "Сортування",
-			"by": "Сортувати за",
 			"direction": "Напрямок",
 			"ascending": "За зростанням",
 			"descending": "За спаданням",
@@ -3056,12 +3189,6 @@
 			}
 		},
 		"boardFilters": {
-			"filterBy": "Фільтрувати за",
-			"allStatuses": "Усі статуси",
-			"allPriorities": "Усі пріоритети",
-			"allAssignees": "Усі виконавці",
-			"allDueDates": "Усі дати завершення",
-			"allLabels": "Усі мітки",
 			"selectedCount": "{{count}} обрано",
 			"subjects": {
 				"status": "Статус",
@@ -3072,23 +3199,26 @@
 			},
 			"operators": {
 				"isAnyOf": "є будь-яким з",
-				"includeAnyOf": "включає будь-який з"
+				"includeAnyOf": "включає будь-який з",
+				"is": "дорівнює",
+				"isNot": "не дорівнює",
+				"isNoneOf": "жоден з",
+				"include": "включає",
+				"exclude": "виключає"
 			},
-			"all": "All",
 			"allCustomFieldValues": "All values",
 			"noCustomFieldValues": "No custom field values",
 			"noValuesUsedYet": "No values used yet"
 		},
 		"gantt": {
+			"searchPlaceholder": "Пошук запланованих тікетів...",
 			"pageTitle": "{{name}} – Ґант",
 			"title": "Часова шкала Ґанта",
-			"searchPlaceholder": "Пошук запланованих тікетів...",
 			"hideTasks": "Сховати завдання",
 			"showTasks": "Показати завдання",
 			"noTasks": "Немає запланованих завдань",
 			"noTasksSubtitle": "Додайте дату початку, дату завершення або обидві до завдань, щоб розмістити їх на часовій шкалі проєкту.",
 			"noTasksFound": "Завдання не знайдено",
-			"noTasksMatch": "Жодне заплановане завдання не відповідає «{{query}}»",
 			"taskHeader": "Завдання",
 			"updateDatesError": "Не вдалося оновити дати завдання",
 			"resizeStart": "Змінити дату початку",
@@ -3113,7 +3243,12 @@
 			"error": "Не вдалося дублювати завдання"
 		},
 		"archive": {
-			"success": "Архівовано {{count}} завдань"
+			"success": "Архівовано {{count}} завдань",
+			"confirmTitle_one": "Архівувати {{count}} завершене завдання?",
+			"confirmTitle_few": "Архівувати {{count}} завершені завдання?",
+			"confirmTitle_many": "Архівувати {{count}} завершених завдань?",
+			"confirmTitle_other": "Архівувати {{count}} завершеного завдання?",
+			"confirmDescription": "Вони зникнуть з дошки й перейдуть до розділу «Архівовані» беклогу."
 		},
 		"listView": {
 			"addTask": "Додати завдання",
@@ -3132,7 +3267,8 @@
 			"count_one": "{{count}} PR",
 			"count_few": "{{count}} PR",
 			"count_many": "{{count}} PR",
-			"count_other": "{{count}} PR"
+			"count_other": "{{count}} PR",
+			"closed": "Закрито"
 		},
 		"assignee": {
 			"label": "Виконавець",
@@ -3141,17 +3277,13 @@
 		"dueDate": {
 			"label": "Дата завершення",
 			"clear": "Очистити дату",
-			"updateSuccess": "Дату завершення завдання успішно оновлено",
 			"updateError": "Не вдалося оновити дату завершення завдання",
-			"clearSuccess": "Дату завершення завдання очищено",
 			"clearError": "Не вдалося очистити дату завершення"
 		},
 		"labels": {
-			"label": "Мітки",
 			"empty": "Немає доступних міток"
 		},
 		"update": {
-			"success": "Завдання успішно оновлено",
 			"error": "Не вдалося оновити завдання"
 		},
 		"contextMenu": {
@@ -3173,7 +3305,11 @@
 			"moveToBoardSuccess": "{{count}} завдань переміщено на дошку",
 			"moveToBoardError": "Не вдалося перемістити завдання на дошку",
 			"delete": "Видалити завдання",
-			"deleteConfirm": "Видалити {{count}} завдань? Цю дію неможливо скасувати.",
+			"deleteConfirmTitle_one": "Видалити {{count}} завдання?",
+			"deleteConfirmTitle_few": "Видалити {{count}} завдання?",
+			"deleteConfirmTitle_many": "Видалити {{count}} завдань?",
+			"deleteConfirmTitle_other": "Видалити {{count}} завдання?",
+			"deleteConfirmDescription": "Вибрані завдання та всі їхні дані буде назавжди видалено. Цю дію неможливо скасувати.",
 			"deleteSuccess": "{{count}} завдань видалено",
 			"deleteError": "Не вдалося видалити завдання",
 			"archive": "Архівувати завдання",
@@ -3189,12 +3325,19 @@
 			"addLabel": "Додати мітку",
 			"addLabelSuccess": "Мітку додано до {{count}} завдань",
 			"addLabelError": "Не вдалося додати мітку",
-			"setDueDate": "Встановити дату завершення",
 			"updateDueDateError": "Не вдалося оновити дату завершення",
 			"actions": "Дії",
 			"searchActions": "Пошук дій...",
 			"noActionsFound": "Дій не знайдено.",
-			"changeStatus": "Змінити статус"
+			"changeStatus": "Змінити статус",
+			"clearSelection": "Зняти виділення",
+			"selectAll": "Вибрати все",
+			"moreActions": "Інші дії",
+			"statusPlaceholder": "Змінити статус…",
+			"priorityPlaceholder": "Встановити пріоритет…",
+			"assigneePlaceholder": "Призначити…",
+			"labelPlaceholder": "Додати мітку…",
+			"columnPlaceholder": "Перемістити в колонку…"
 		},
 		"editor": {
 			"table": {
@@ -3228,10 +3371,117 @@
 		"descriptionLoadError": "The description could not be loaded. Retry to load the current version.",
 		"checklistProgress": "Виконано пунктів списку: {{completed}} із {{total}}",
 		"customFields": {
-			"ariaLabel": "Custom fields"
+			"fields": "Поля",
+			"empty": "Порожньо",
+			"required": "Обов'язково",
+			"enterKey": "Enter",
+			"toSave": "щоб зберегти",
+			"clear": "Очистити",
+			"setValue": "Задати {{field}}…",
+			"noMatches": "Немає відповідних варіантів",
+			"missingRequired_one": "{{count}} обов'язкове поле не заповнено",
+			"missingRequired_few": "{{count}} обов'язкові поля не заповнені",
+			"missingRequired_many": "{{count}} обов'язкових полів не заповнено",
+			"missingRequired_other": "{{count}} обов'язкового поля не заповнено",
+			"saveError": "Не вдалося зберегти поле «{{field}}»",
+			"moreFields_one": "Ще {{count}} поле",
+			"moreFields_few": "Ще {{count}} поля",
+			"moreFields_many": "Ще {{count}} полів",
+			"moreFields_other": "Ще {{count}} поля",
+			"manage": "Керувати полями"
 		},
 		"board": {
-			"reorderFailed": "Could not move task. Please try again."
+			"reorderFailed": "Could not move task. Please try again.",
+			"keyboardInstructions": "Натисніть Пробіл для попереднього перегляду та Enter, щоб відкрити це завдання. Використовуйте Alt або Option зі стрілками, щоб перемістити його."
+		},
+		"recurrence": {
+			"daily_few": "Кожні {{count}} дні",
+			"daily_many": "Кожні {{count}} днів",
+			"daily_one": "Кожен {{count}} день",
+			"daily_other": "Кожні {{count}} дня",
+			"monthly_few": "Кожні {{count}} місяці",
+			"monthly_many": "Кожні {{count}} місяців",
+			"monthly_one": "Кожен {{count}} місяць",
+			"monthly_other": "Кожні {{count}} місяця",
+			"weekly_few": "Кожні {{count}} тижні",
+			"weekly_many": "Кожні {{count}} тижнів",
+			"weekly_one": "Кожен {{count}} тиждень",
+			"weekly_other": "Кожні {{count}} тижня",
+			"yearly_few": "Кожні {{count}} роки",
+			"yearly_many": "Кожні {{count}} років",
+			"yearly_one": "Кожен {{count}} рік",
+			"yearly_other": "Кожні {{count}} року",
+			"onDays": "{{rule}}: {{days}}"
+		},
+		"toolbar": {
+			"search": "Пошук завдань",
+			"clearSearch": "Очистити пошук",
+			"taskCount_one": "{{count}} завдання",
+			"taskCount_few": "{{count}} завдання",
+			"taskCount_many": "{{count}} завдань",
+			"taskCount_other": "{{count}} завдання",
+			"shownCount_one": "{{shown}} з {{count}} завдання",
+			"shownCount_few": "{{shown}} з {{count}} завдань",
+			"shownCount_many": "{{shown}} з {{count}} завдань",
+			"shownCount_other": "{{shown}} з {{count}} завдання"
+		},
+		"display": {
+			"title": "Відображення",
+			"sortBy": "Сортувати за",
+			"showOnCards": "Показувати на картках",
+			"showOnRows": "Показувати в рядках",
+			"checklistProgress": "Прогрес чек-листа",
+			"projectBackground": "Фон проєкту",
+			"layout": "Макет"
+		},
+		"filterBar": {
+			"label": "Активні фільтри",
+			"removeFilter": "Прибрати фільтр «{{name}}»",
+			"noMatches": "Немає завдань, що відповідають пошуку чи фільтрам.",
+			"customFieldsLoading": "Loading custom-field values. Results are shown without custom-field filters.",
+			"customFieldsRefreshError": "Custom-field values could not be refreshed. Results may be out of date.",
+			"customFieldsUnavailable": "Custom-field values could not be loaded. Results are shown without custom-field filters."
+		},
+		"filterMenu": {
+			"addFilter": "Додати фільтр…",
+			"searchSubject": "{{name}}…",
+			"noResults": "Нічого не знайдено"
+		},
+		"shortcuts": {
+			"assignedToMe": "Призначено вам",
+			"idCopied": "ID завдання скопійовано",
+			"titleCopied": "Назву завдання скопійовано",
+			"markdownCopied": "Скопійовано як Markdown",
+			"copyFailed": "Не вдалося скопіювати в буфер обміну.",
+			"pageUrlCopied": "URL сторінки скопійовано"
+		},
+		"due": {
+			"overdueDays_one": "Прострочено на {{count}} дн.",
+			"overdueDays_few": "Прострочено на {{count}} дн.",
+			"overdueDays_many": "Прострочено на {{count}} дн.",
+			"overdueDays_other": "Прострочено на {{count}} дн.",
+			"overdueWeeks_one": "Прострочено на {{count}} тиж.",
+			"overdueWeeks_few": "Прострочено на {{count}} тиж.",
+			"overdueWeeks_many": "Прострочено на {{count}} тиж.",
+			"overdueWeeks_other": "Прострочено на {{count}} тиж.",
+			"today": "Сьогодні",
+			"tomorrow": "Завтра",
+			"inDays_one": "Через {{count}} день",
+			"inDays_few": "Через {{count}} дні",
+			"inDays_many": "Через {{count}} днів",
+			"inDays_other": "Через {{count}} дня",
+			"fullDate": "Термін {{date}}"
+		},
+		"datePicker": {
+			"dueDatePlaceholder": "Установити термін…",
+			"startDatePlaceholder": "Установити дату початку…",
+			"datePlaceholder": "Установити дату…",
+			"thisWeekend": "Цими вихідними",
+			"nextWeek": "Наступного тижня",
+			"pickDate": "Вибрати дату",
+			"startsOn": "Початок: {{date}}",
+			"beforeStart": "{{date}} раніше за дату початку",
+			"afterDue": "{{date}} пізніше за термін"
 		}
 	},
 	"invitations": {
@@ -3725,6 +3975,863 @@
 			"composeLinkDescription": "The maintained compose.yml with persistent storage and health checks.",
 			"startLink": "Start and verify the services",
 			"startLinkDescription": "Start the stack, inspect its status, and check that the application is available."
+		}
+	},
+	"mobile": {
+		"common": {
+			"save": "Зберегти",
+			"cancel": "Скасувати",
+			"delete": "Видалити",
+			"retry": "Спробувати ще раз",
+			"somethingWrong": "Щось пішло не так",
+			"close": "Закрити"
+		},
+		"errors": {
+			"notSignedIn": "Вхід не виконано",
+			"unreachable": "Не вдається з’єднатися із сервером. Перевірте підключення та адресу сервера.",
+			"sessionExpired": "Сеанс завершився. Увійдіть знову.",
+			"forbidden": "У вас немає дозволу на цю дію.",
+			"notFound": "Не знайдено.",
+			"tooManyRequests": "Забагато запитів. Зачекайте трохи.",
+			"serverProblem": "На сервері сталася помилка ({{status}}).",
+			"requestFailed": "Запит не виконано ({{status}}).",
+			"notKaneo": "{{url}} не схожий на сервер Kaneo.",
+			"noInstance": "За адресою {{url}} не знайдено екземпляр Kaneo (HTTP {{status}}).",
+			"noSession": "Сервер не повернув сеанс. Спробуйте увійти через браузер.",
+			"deviceFailed": "Не вдалося увійти з пристрою (HTTP {{status}}).",
+			"apiKeyRejected": "Цей API-ключ відхилено.",
+			"signInRejected": "Сервер не прийняв вхід.",
+			"uploadFailed": "Не вдалося завантажити ({{status}})"
+		},
+		"signIn": {
+			"tagline": "Просте керування проєктами. Підключіться до Kaneo Cloud або власного сервера.",
+			"cloud": "Kaneo Cloud",
+			"selfHosted": "Власний сервер",
+			"captcha": "На цьому кроці сервер вимагає перевірку в браузері. Скористайтеся кнопкою «Продовжити в браузері».",
+			"invalidClient": "Цей сервер не дозволяє вхід із пристрою. Попросіть адміністратора додати «kaneo-cli» до DEVICE_AUTH_CLIENT_IDS або увійдіть за паролем чи API-ключем.",
+			"serverAddress": "Адреса сервера",
+			"serverAddressHint": "Адреса, за якою ви відкриваєте Kaneo. Для серверів без TLS використовуйте http://. Якщо API працює на іншому хості, введіть адресу API.",
+			"connect": "Підключитися",
+			"recent": "Нещодавні",
+			"change": "Змінити",
+			"email": "Електронна пошта",
+			"password": "Пароль",
+			"togglePassword": "Показати або приховати пароль",
+			"signIn": "Увійти",
+			"or": "або",
+			"continueInBrowser": "Продовжити в браузері",
+			"browserHint": "GitHub, Google, Discord або SSO",
+			"emailCode": "Надіслати код входу на email",
+			"sendTo": "Надіслати на {{email}}",
+			"noPassword": "Пароль не потрібен",
+			"useApiKey": "Використати API-ключ",
+			"newToKaneo": "Вперше в Kaneo?",
+			"createAccount": "Створити обліковий запис",
+			"code": {
+				"title": "Вхід за кодом",
+				"message": "Ми надішлемо вам 6-значний код на email. Пароль не потрібен.",
+				"send": "Надіслати код",
+				"checkEmail": "Перевірте пошту",
+				"sent": "Ми надіслали 6-значний код на {{email}}",
+				"verify": "Підтвердити",
+				"didntGet": "Не отримали?",
+				"resend": "Надіслати ще раз"
+			},
+			"device": {
+				"denied": "Вхід відхилено в браузері.",
+				"expired": "Термін дії коду минув. Почніть знову, щоб отримати новий.",
+				"openFailed": "Не вдалося відкрити браузер. Скопіюйте посилання.",
+				"message": "Підтвердьте цей пристрій на сайті Kaneo. Там працюють GitHub, Google, Discord і SSO.",
+				"yourCode": "Ваш код",
+				"copyCode": "Скопіювати код",
+				"codeCopied": "Код скопійовано",
+				"copyLink": "Скопіювати посилання",
+				"linkCopied": "Посилання скопійовано",
+				"openBrowser": "Відкрити браузер",
+				"tryAgain": "Спробувати ще раз",
+				"waiting": "Очікування підтвердження…",
+				"gettingCode": "Отримання коду…"
+			},
+			"apiKey": {
+				"message": "Створіть ключ у вебверсії: «Налаштування» → «API-ключі». Він працює, навіть якщо інші способи входу вимкнено.",
+				"label": "API-ключ"
+			},
+			"signUp": {
+				"name": "Ім’я",
+				"passwordHint": "Щонайменше 8 символів"
+			}
+		},
+		"invitations": {
+			"accepted": "Запрошення прийнято",
+			"declined": "Запрошення відхилено",
+			"title": "Запрошення",
+			"description": "Робочі простори, до яких вас запросили.",
+			"emptyTitle": "Немає запрошень, що очікують",
+			"emptyMessage": "Запрошення з’являться тут після підтвердження вашої email-адреси. Ви завжди можете приєднатися за посиланням із листа.",
+			"invitedYou": "{{name}} запрошує вас",
+			"decline": "Відхилити",
+			"accept": "Прийняти",
+			"joinWithLink": "Приєднатися за посиланням-запрошенням",
+			"linkPlaceholder": "Вставте посилання з листа",
+			"join": "Приєднатися"
+		},
+		"taskDetail": {
+			"someone": "Хтось",
+			"status": {
+				"planned": "Заплановано",
+				"archived": "Архівовано"
+			},
+			"section": {
+				"addTo": "Додати до {{title}}"
+			},
+			"fields": {
+				"title": "Поля",
+				"empty": "Порожньо",
+				"none": "Немає"
+			},
+			"subtasks": {
+				"title": "Підзавдання",
+				"add": "Додати підзавдання",
+				"parent": "Батьківське завдання",
+				"empty": "Немає підзавдань"
+			},
+			"relations": {
+				"title": "Зв’язки",
+				"link": "Пов’язати завдання",
+				"blocks": "Блокує",
+				"blockedBy": "Блокується",
+				"related": "Пов’язані",
+				"relatedTo": "Пов’язане з",
+				"remove": "Видалити зв’язок",
+				"empty": "Немає пов’язаних завдань",
+				"removeTitle": "Видалити зв’язок?",
+				"removeMessage": "Завдання залишаться, видалиться лише зв’язок між ними.",
+				"removeConfirm": "Видалити",
+				"searchPlaceholder": "Пошук завдань за назвою або номером"
+			},
+			"links": {
+				"title": "Посилання",
+				"add": "Додати посилання",
+				"remove": "Видалити посилання",
+				"synced": "Синхронізовано",
+				"empty": "Немає посилань",
+				"url": "URL",
+				"titleLabel": "Назва",
+				"optional": "Необов’язково"
+			},
+			"time": {
+				"title": "Час",
+				"total": "Усього {{duration}}",
+				"log": "Записати час",
+				"editEntry": "Редагувати запис часу",
+				"logged": "Час записано",
+				"stop": "Стоп",
+				"start": "Запустити таймер",
+				"running": "{{time}} (триває)",
+				"hoursUnit": "год",
+				"minutesUnit": "хв",
+				"chipMinutes": "{{count}} хв",
+				"chipHours": "{{count}} год",
+				"logDuration": "Записати {{duration}}",
+				"durationHoursMinutes": "{{hours}} год {{minutes}} хв",
+				"durationMinutes": "{{minutes}} хв",
+				"date": "Дата",
+				"notePlaceholder": "Над чим ви працювали?"
+			},
+			"activity": {
+				"title": "Активність",
+				"comment": "Коментувати",
+				"edit": "Редагувати",
+				"editComment": "Редагувати коментар",
+				"edited": "{{time}}, змінено",
+				"deleteTitle": "Видалити коментар?",
+				"deleteMessage": "Цю дію не можна скасувати.",
+				"entry": "{{name}} {{action}}"
+			},
+			"menu": {
+				"share": "Поділитися",
+				"duplicate": "Дублювати",
+				"move": "Перемістити до проєкту…",
+				"refresh": "Оновити",
+				"delete": "Видалити завдання",
+				"moveTitle": "Перемістити до проєкту",
+				"duplicated": "Завдання продубльовано",
+				"moved": "Завдання переміщено",
+				"deleted": "Завдання видалено",
+				"deleteTitle": "Видалити завдання?",
+				"deleteMessage": "«{{title}}» і коментарі до нього буде видалено назавжди."
+			},
+			"screen": {
+				"copyLink": "Скопіювати посилання",
+				"linkCopied": "Посилання скопійовано",
+				"more": "Більше",
+				"editTitle": "Редагувати назву",
+				"editDescription": "Редагувати опис",
+				"addDescription": "Додайте опис…"
+			}
+		},
+		"workspaceNew": {
+			"title": "Новий робочий простір",
+			"description": "Місце для проєктів вашої команди. Далі ви зможете запросити людей.",
+			"name": "Назва",
+			"namePlaceholder": "Дизайн-студія",
+			"descriptionLabel": "Опис",
+			"optional": "Необов’язково",
+			"descriptionPlaceholder": "Для чого цей робочий простір?",
+			"create": "Створити робочий простір"
+		},
+		"taskFields": {
+			"status": "Статус",
+			"planned": "Заплановано",
+			"priority": "Пріоритет",
+			"assignee": "Виконавець",
+			"unassigned": "Не призначено",
+			"startDate": "Дата початку",
+			"dueDate": "Дата завершення",
+			"labels": "Мітки",
+			"none": "Немає",
+			"searchPeople": "Пошук людей",
+			"you": "{{name}} (ви)",
+			"addNumber": "Введіть число",
+			"empty": "Порожньо",
+			"archived": "Архівовано",
+			"doneColumn": "Колонка «Готово»",
+			"starts": "Початок {{date}}",
+			"overdue_one": "{{date}}, прострочено на {{count}} день",
+			"overdue_few": "{{date}}, прострочено на {{count}} дні",
+			"overdue_many": "{{date}}, прострочено на {{count}} днів",
+			"overdue_other": "{{date}}, прострочено на {{count}} дня",
+			"done": "Готово",
+			"searchOrCreate": "Знайти або створити",
+			"createLabel": "Створити мітку «{{name}}»",
+			"labelColor": "Колір нової мітки",
+			"noLabels": "Міток поки немає. Введіть назву, щоб створити."
+		},
+		"taskNew": {
+			"newSubtask": "Нове підзавдання",
+			"project": "Проєкт",
+			"create": "Створити",
+			"taskTitle": "Назва завдання",
+			"noLabels": "У цьому робочому просторі поки немає міток.",
+			"labelsAndParentFailed": "Завдання створено, але не вдалося зберегти деякі мітки та зв’язок із батьківським завданням.",
+			"labelsFailed": "Завдання створено, але деякі мітки не вдалося додати.",
+			"parentFailed": "Завдання створено, але його не вдалося пов’язати з батьківським завданням."
+		},
+		"editor": {
+			"description": "Опис",
+			"placeholder": "Додайте опис… Підтримується Markdown.",
+			"write": "Текст",
+			"preview": "Перегляд",
+			"nothingToPreview": "Нічого переглядати",
+			"bold": "Жирний",
+			"italic": "Курсив",
+			"heading": "Заголовок",
+			"list": "Список",
+			"code": "Код",
+			"link": "Посилання",
+			"boldPlaceholder": "жирний",
+			"italicPlaceholder": "курсив",
+			"codePlaceholder": "код",
+			"linkPlaceholder": "посилання",
+			"insertImage": "Вставити зображення",
+			"attachment": "Вкладення"
+		},
+		"composer": {
+			"reply": "Відповісти {{name}}…",
+			"placeholder": "Додайте коментар…",
+			"mentionSomeone": "Згадати когось",
+			"attachImage": "Прикріпити зображення",
+			"sendComment": "Надіслати коментар",
+			"mention": "Згадати",
+			"searchPeople": "Пошук людей"
+		},
+		"board": {
+			"filterTasksActive": "Фільтр завдань… (активних: {{count}})",
+			"movedTask": "Завдання {{ticket}} переміщено до {{status}}",
+			"showTasks_one": "Показати {{count}} завдання",
+			"showTasks_few": "Показати {{count}} завдання",
+			"showTasks_many": "Показати {{count}} завдань",
+			"showTasks_other": "Показати {{count}} завдання",
+			"memberYou": "{{name}} (ви)",
+			"dueDateOverdue_one": "{{date}}, прострочено на {{count}} дн.",
+			"dueDateOverdue_few": "{{date}}, прострочено на {{count}} дн.",
+			"dueDateOverdue_many": "{{date}}, прострочено на {{count}} дн.",
+			"dueDateOverdue_other": "{{date}}, прострочено на {{count}} дн.",
+			"projects": "Проєкти",
+			"back": "Назад",
+			"boardView": "Дошка",
+			"listView": "Список",
+			"more": "Більше",
+			"switchProject": "Змінити проєкт",
+			"noTasksMatchTheFilters": "Немає завдань за цими фільтрами",
+			"nothingPlannedYet": "Поки нічого не заплановано",
+			"noTasksHere": "Тут немає завдань",
+			"addTask": "Додати завдання",
+			"noTasksMatch": "Немає відповідних завдань",
+			"noTasksYet": "Завдань поки немає",
+			"filters": "Фільтри",
+			"filterTasks": "Фільтр завдань…",
+			"me": "Я",
+			"newTask": "Нове завдання",
+			"board": "Дошка",
+			"projectSettings": "Налаштування проєкту",
+			"hidePlanned": "Приховати заплановані",
+			"showPlanned": "Показати заплановані",
+			"hideArchived": "Приховати архівовані",
+			"showArchived": "Показати архівовані",
+			"refresh": "Оновити",
+			"planned": "Заплановано",
+			"archived": "Архівовано",
+			"reset": "Скинути",
+			"assignee": "Виконавець",
+			"unassigned": "Не призначено",
+			"priority": "Пріоритет",
+			"labels": "Мітки",
+			"overdueOnly": "Лише прострочені",
+			"tasksNotOnTheBoardYet": "Завдання, яких ще немає на дошці",
+			"moveTo": "Перемістити до",
+			"assignToMe": "Призначити мені",
+			"sendToTopOfColumn": "На початок колонки",
+			"sendToBottomOfColumn": "У кінець колонки",
+			"openTask": "Відкрити завдання",
+			"searchPeople": "Пошук людей"
+		},
+		"projectSettings": {
+			"deleteNamedTitle": "Видалити «{{name}}»?",
+			"text": "Текст",
+			"number": "Число",
+			"date": "Дата",
+			"checkbox": "Прапорець",
+			"dropdown": "Випадний список",
+			"multiSelect": "Множинний вибір",
+			"projectUpdated": "Проєкт оновлено",
+			"project": "Проєкт",
+			"projectSettings": "Налаштування проєкту",
+			"general": "Загальні",
+			"publicBoard": "Публічна дошка",
+			"anyoneWithTheLinkCanViewTheBoard": "Будь-хто з посиланням може переглядати дошку",
+			"columns": "Колонки",
+			"addColumn": "Додати колонку",
+			"doneColumn": "Колонка «Готово»",
+			"moveUp": "Перемістити вгору",
+			"moveDown": "Перемістити вниз",
+			"customFields": "Користувацькі поля",
+			"addField": "Додати поле",
+			"noCustomFields": "Немає користувацьких полів",
+			"projectRestored": "Проєкт відновлено",
+			"archiveProjectTitle": "Архівувати проєкт?",
+			"itDisappearsFromTheProjectListYouCanRestoreItLater": "Він зникне зі списку проєктів. Пізніше його можна відновити.",
+			"archive": "Архівувати",
+			"projectArchived": "Проєкт архівовано",
+			"restoreProject": "Відновити проєкт",
+			"archiveProject": "Архівувати проєкт",
+			"moveToAnotherWorkspace": "Перемістити до іншого робочого простору",
+			"deleteProjectTitle": "Видалити проєкт?",
+			"allTasksCommentsAndTimeEntriesInThisProjectWillBePermanentlyDeleted": "Усі завдання, коментарі та записи часу в цьому проєкті буде видалено назавжди.",
+			"projectDeleted": "Проєкт видалено",
+			"deleteProject": "Видалити проєкт",
+			"column": "Колонка",
+			"rename": "Перейменувати",
+			"unmarkAsDoneColumn": "Зняти позначку «Готово»",
+			"markAsDoneColumn": "Позначити як «Готово»",
+			"deleteColumn": "Видалити колонку",
+			"tasksInThisColumnMayNeedToBeMovedFirst": "Можливо, спершу потрібно перемістити завдання з цієї колонки.",
+			"columnDeleted": "Колонку видалено",
+			"renameColumn": "Перейменувати колонку",
+			"field": "Поле",
+			"deleteField": "Видалити поле",
+			"valuesStoredInThisFieldAreDeletedFromEveryTask": "Значення цього поля буде видалено з усіх завдань.",
+			"fieldDeleted": "Поле видалено",
+			"moveToWorkspace": "Перемістити до робочого простору",
+			"projectMoved": "Проєкт переміщено",
+			"ok": "OK",
+			"name": "Назва",
+			"key": "Ключ",
+			"changesFutureAndExistingTaskIDs": "Змінить ID нових та наявних завдань",
+			"saveChanges": "Зберегти зміни",
+			"newColumn": "Нова колонка",
+			"blocked": "Заблоковано",
+			"tasksHereCountAsFinished": "Завдання тут вважаються завершеними",
+			"newCustomField": "Нове користувацьке поле",
+			"platform": "Платформа",
+			"type": "Тип",
+			"options": "Варіанти",
+			"separateWithCommas": "Через кому",
+			"androidIOSWeb": "Android, iOS, Web",
+			"required": "Обов’язкове",
+			"checked": "Позначено",
+			"chooseDefault": "Виберіть значення за замовчуванням",
+			"defaultValue": "Значення за замовчуванням",
+			"multiselectOptionsRequired": "Додайте щонайменше два різні варіанти.",
+			"unchecked": "Не позначено",
+			"validDefaultRequired": "Введіть дійсне значення за замовчуванням для цього обов’язкового поля."
+		},
+		"projectNew": {
+			"newProject": "Новий проєкт",
+			"name": "Назва",
+			"customerPortal": "Портал для клієнтів",
+			"key": "Ключ",
+			"usedInTaskIDs": "Використовується в ID завдань",
+			"createProject": "Створити проєкт"
+		},
+		"home": {
+			"noWorkspace": {
+				"title": "Робочого простору поки немає",
+				"body": "У робочих просторах зберігаються ваші проєкти й команда. Створіть новий або прийміть запрошення.",
+				"create": "Створити робочий простір",
+				"viewInvitations_one": "Переглянути {{count}} запрошення",
+				"viewInvitations_few": "Переглянути {{count}} запрошення",
+				"viewInvitations_many": "Переглянути {{count}} запрошень",
+				"viewInvitations_other": "Переглянути {{count}} запрошення",
+				"joinWithLink": "Приєднатися за посиланням-запрошенням",
+				"signedInAs": "Ви увійшли як {{email}}"
+			},
+			"switchWorkspace": "Змінити робочий простір",
+			"search": "Пошук",
+			"account": "Обліковий запис",
+			"archived": "Архівовано",
+			"due": "Термін {{date}}",
+			"progress": "{{done}} з {{total}}",
+			"noTasks": "Немає завдань",
+			"upNext": "Далі",
+			"viewAll": "Усі",
+			"projects": "Проєкти",
+			"newProject": "Новий проєкт",
+			"empty": {
+				"title": "Проєктів поки немає",
+				"message": "У проєктах зберігаються ваші дошки та завдання."
+			},
+			"hideArchived": "Приховати архівовані проєкти",
+			"showArchived": "Показати архівовані проєкти"
+		},
+		"inbox": {
+			"title": "Вхідні",
+			"markAllRead": "Прочитати все",
+			"allCaughtUpToast": "Усе прочитано",
+			"more": "Більше",
+			"empty": {
+				"title": "Усе прочитано",
+				"message": "Тут з’являються призначення, коментарі та згадки."
+			},
+			"today": "Сьогодні",
+			"earlier": "Раніше",
+			"recent": "Нещодавні",
+			"clearAll": "Очистити всі сповіщення",
+			"confirmClear": {
+				"title": "Очистити всі сповіщення?",
+				"message": "Усі сповіщення в цьому робочому просторі буде видалено.",
+				"confirm": "Очистити все"
+			}
+		},
+		"activity": {
+			"title": "Активність",
+			"subtitle": "Усе, що відбувається в {{workspace}}",
+			"empty": "Немає нещодавньої активності",
+			"someone": "Хтось",
+			"commentedOn": "прокоментував {{target}}"
+		},
+		"myTasks": {
+			"title": "Мої завдання",
+			"by": {
+				"due": "Термін",
+				"project": "Проєкт",
+				"status": "Статус"
+			},
+			"due": {
+				"overdue": "Прострочено",
+				"today": "Сьогодні",
+				"thisWeek": "Цього тижня",
+				"later": "Пізніше",
+				"none": "Без терміну"
+			},
+			"empty": {
+				"title": "Вам нічого не призначено",
+				"message": "Тут з’являться завдання, призначені вам у цьому робочому просторі."
+			},
+			"showing": "Показано {{shown}} з {{total}} завдань",
+			"assigned_one": "{{count}} призначене",
+			"assigned_few": "{{count}} призначені",
+			"assigned_many": "{{count}} призначених",
+			"assigned_other": "{{count}} призначених"
+		},
+		"nav": {
+			"home": "Головна",
+			"tasks": "Мої завдання",
+			"inbox": "Вхідні",
+			"activity": "Активність",
+			"inboxUnread": "Вхідні, непрочитаних: {{count}}"
+		},
+		"workspaceSwitcher": {
+			"title": "Робочі простори",
+			"settings": "Налаштування робочого простору",
+			"members": "Учасники",
+			"labels": "Мітки",
+			"invitations": "Запрошення",
+			"create": "Створити робочий простір"
+		},
+		"search": {
+			"placeholder": "Пошук завдань, проєктів, коментарів",
+			"clear": "Очистити",
+			"kinds": {
+				"all": "Усе",
+				"tasks": "Завдання",
+				"projects": "Проєкти",
+				"comments": "Коментарі",
+				"activity": "Активність"
+			},
+			"empty": {
+				"title": "Пошук у робочому просторі",
+				"message": "Шукайте завдання за назвою чи номером, проєкти та коментарі."
+			},
+			"failed": "Помилка пошуку",
+			"noResults": "Нічого не знайдено за запитом «{{query}}»",
+			"commentMeta": "{{name}}, {{when}}"
+		},
+		"notificationText": {
+			"activity": {
+				"created": "створив завдання",
+				"commented": "прокоментував: {{text}}",
+				"statusChanged": "перемістив з {{from}} до {{to}}",
+				"priorityChanged": "змінив пріоритет з {{from}} на {{to}}",
+				"assigneeChanged": "змінив виконавця",
+				"selfAssigned": "призначив завдання собі",
+				"assignedTo": "призначив завдання: {{assignee}}",
+				"unassigned": "зняв виконавця",
+				"dueDateSet": "встановив термін {{date}}",
+				"dueDateRemoved": "прибрав термін",
+				"renamed": "перейменував на «{{title}}»",
+				"titleChanged": "змінив назву",
+				"descriptionChanged": "оновив опис",
+				"taskUpdated": "оновив завдання"
+			},
+			"taskCreated": "Вам призначено нове завдання",
+			"assignedByActor": "{{actor}} призначив вам завдання",
+			"assignedToTask": "Вам призначено «{{title}}»",
+			"assignedToUntitled": "Вам призначено завдання",
+			"statusChangedOnTask": "Змінено статус: «{{title}}»",
+			"statusChangedOnUntitled": "Змінено статус завдання",
+			"statusTransition": "{{from}} → {{to}}",
+			"commentedByActor": "{{actor}} залишив коментар",
+			"newComment": "Новий коментар",
+			"mentionedByActor": "{{actor}} згадав вас",
+			"mentioned": "Вас згадали",
+			"timeLoggedOnTask": "Записано час: «{{title}}»",
+			"timeLoggedOnUntitled": "Записано час у завданні",
+			"workspaceCreated": "Робочий простір «{{name}}» створено"
+		},
+		"background": {
+			"summary_one": "Ще {{count}} нове сповіщення",
+			"summary_few": "Ще {{count}} нові сповіщення",
+			"summary_many": "Ще {{count}} нових сповіщень",
+			"summary_other": "Ще {{count}} нового сповіщення",
+			"channelName": "Активність Kaneo",
+			"channelDescription": "Призначення, коментарі та згадки з ваших робочих просторів"
+		},
+		"ui": {
+			"back": "Назад",
+			"loadFailed": "Не вдалося завантажити",
+			"search": "Пошук",
+			"nothingMatches": "Нічого не знайдено за запитом «{{query}}»"
+		},
+		"picker": {
+			"clear": "Очистити",
+			"nextWeek": "Наступного тижня",
+			"previousMonth": "Попередній місяць",
+			"nextMonth": "Наступний місяць"
+		},
+		"time": {
+			"now": "зараз",
+			"justNow": "щойно",
+			"minutesShort_one": "{{count}} хв",
+			"minutesShort_few": "{{count}} хв",
+			"minutesShort_many": "{{count}} хв",
+			"minutesShort_other": "{{count}} хв",
+			"hoursShort_one": "{{count}} год",
+			"hoursShort_few": "{{count}} год",
+			"hoursShort_many": "{{count}} год",
+			"hoursShort_other": "{{count}} год",
+			"secondsShort_one": "{{count}} с",
+			"secondsShort_few": "{{count}} с",
+			"secondsShort_many": "{{count}} с",
+			"secondsShort_other": "{{count}} с",
+			"minutesAgo_one": "{{count}} хв тому",
+			"minutesAgo_few": "{{count}} хв тому",
+			"minutesAgo_many": "{{count}} хв тому",
+			"minutesAgo_other": "{{count}} хв тому",
+			"hoursAgo_one": "{{count}} год тому",
+			"hoursAgo_few": "{{count}} год тому",
+			"hoursAgo_many": "{{count}} год тому",
+			"hoursAgo_other": "{{count}} год тому",
+			"durationHoursMinutes": "{{hours}} год {{minutes}} хв",
+			"goodEvening": "Добрий вечір",
+			"goodMorning": "Доброго ранку",
+			"goodAfternoon": "Добрий день",
+			"today": "Сьогодні",
+			"tomorrow": "Завтра",
+			"yesterday": "Учора",
+			"minutes_one": "{{count}} хв",
+			"minutes_few": "{{count}} хв",
+			"minutes_many": "{{count}} хв",
+			"minutes_other": "{{count}} хв",
+			"hours_one": "{{count}} год",
+			"hours_few": "{{count}} год",
+			"hours_many": "{{count}} год",
+			"hours_other": "{{count}} год"
+		},
+		"meta": {
+			"priority": {
+				"noPriority": "Без пріоритету",
+				"low": "Низький",
+				"medium": "Середній",
+				"high": "Високий",
+				"urgent": "Терміновий"
+			},
+			"labelColor": {
+				"stone": "Камінь",
+				"slate": "Сланець",
+				"lavender": "Лаванда",
+				"sage": "Шавлія",
+				"forest": "Ліс",
+				"amber": "Бурштин",
+				"terracotta": "Теракота",
+				"rose": "Троянда",
+				"crimson": "Багряний",
+				"ocean": "Океан",
+				"sky": "Небо",
+				"lagoon": "Лагуна",
+				"orchid": "Орхідея"
+			},
+			"role": {
+				"owner": "Власник",
+				"admin": "Адміністратор",
+				"member": "Учасник",
+				"viewer": "Спостерігач"
+			},
+			"roleHint": {
+				"owner": "Повний доступ, зокрема видалення робочого простору",
+				"admin": "Також керує учасниками та налаштуваннями",
+				"member": "Створює та редагує завдання",
+				"viewer": "Переглядає проєкти та завдання"
+			}
+		},
+		"account": {
+			"title": "Обліковий запис",
+			"description": "Як вас бачать колеги в усіх робочих просторах.",
+			"profile": {
+				"title": "Профіль",
+				"photo": "Фото профілю",
+				"photoFormats": "PNG, JPG або WebP",
+				"change": "Змінити",
+				"name": "Ім’я",
+				"changePassword": "Змінити пароль"
+			},
+			"notifications": {
+				"title": "Сповіщення",
+				"phone": "Сповіщення на телефоні",
+				"phoneHint": "Перевірка приблизно кожні 15 хвилин",
+				"delivery": "Доставка та події",
+				"deliveryHint": "Email, ntfy, Gotify, вебхуки",
+				"invitations": "Запрошення",
+				"permissionDenied": "Спершу дозвольте сповіщення для Kaneo в налаштуваннях системи."
+			},
+			"connection": {
+				"title": "Підключення",
+				"server": "Сервер",
+				"signedInWith": "Спосіб входу",
+				"apiKey": "API-ключ",
+				"sessionToken": "Токен сеансу",
+				"appVersion": "Версія застосунку"
+			},
+			"signOut": {
+				"button": "Вийти",
+				"title": "Вийти?",
+				"message": "Ви зможете увійти знову будь-коли."
+			},
+			"photoMenu": {
+				"choose": "Вибрати фото",
+				"remove": "Видалити фото"
+			},
+			"toast": {
+				"photoUpdated": "Фото оновлено",
+				"photoRemoved": "Фото видалено",
+				"nameUpdated": "Ім’я оновлено",
+				"passwordChanged": "Пароль змінено"
+			},
+			"password": {
+				"title": "Змінити пароль",
+				"current": "Поточний пароль",
+				"new": "Новий пароль",
+				"confirm": "Підтвердьте новий пароль",
+				"confirmPlaceholder": "Введіть ще раз",
+				"mismatch": "Паролі не збігаються",
+				"signOutOthers": "Вийти на інших пристроях"
+			}
+		},
+		"notificationSettings": {
+			"title": "Сповіщення",
+			"description": "Куди й про що Kaneo вам повідомлятиме.",
+			"on": "Увімк.",
+			"off": "Вимк.",
+			"notSet": "Не налаштовано",
+			"delivery": {
+				"title": "Доставка",
+				"email": "Електронна пошта",
+				"emailHint": "На email вашого облікового запису",
+				"ntfyHint": "Надсилати сповіщення в тему ntfy",
+				"gotifyHint": "Надсилати сповіщення на сервер Gotify",
+				"webhook": "Вебхук",
+				"webhookHint": "Надсилати сповіщення POST-запитом на URL"
+			},
+			"events": {
+				"title": "Про що сповіщати",
+				"assignments": "Призначення",
+				"assignmentsHint": "Коли вам призначають завдання",
+				"comments": "Коментарі",
+				"commentsHint": "Нові коментарі до ваших завдань",
+				"statusChanges": "Зміни статусу",
+				"statusChangesHint": "Коли ваші завдання переміщуються між колонками",
+				"dueDate": "Нагадування про терміни",
+				"dueDateHint": "Перед терміном завдання, призначеного вам",
+				"remindMe": "Нагадати",
+				"remindBefore": "За {{time}}",
+				"remindPickerTitle": "Нагадати за"
+			},
+			"leadTime": {
+				"minutes15": "15 хвилин",
+				"hour1": "1 година",
+				"hours3": "3 години",
+				"day1": "1 день",
+				"days2": "2 дні",
+				"week1": "1 тиждень",
+				"minutes_one": "{{count}} хвилина",
+				"minutes_few": "{{count}} хвилини",
+				"minutes_many": "{{count}} хвилин",
+				"minutes_other": "{{count}} хвилини"
+			},
+			"channel": {
+				"enabled": "Надсилати сповіщення сюди",
+				"webhookUrl": "URL вебхука",
+				"serverUrl": "URL сервера",
+				"topic": "Тема",
+				"accessToken": "Токен доступу",
+				"appToken": "Токен застосунку",
+				"signingSecret": "Секрет підпису",
+				"secretSaved": "Збережено. Введіть новий, щоб замінити",
+				"secretOptional": "Необов’язково"
+			}
+		},
+		"workspaceSettings": {
+			"title": "Робочий простір",
+			"description": "Налаштування для всіх у {{name}}.",
+			"thisWorkspace": "цьому робочому просторі",
+			"general": {
+				"title": "Загальні",
+				"name": "Назва",
+				"description": "Опис",
+				"slug": "Slug: <mono>{{slug}}</mono>",
+				"save": "Зберегти зміни"
+			},
+			"manage": {
+				"title": "Керування",
+				"members": "Учасники",
+				"labels": "Мітки"
+			},
+			"danger": {
+				"title": "Небезпечна зона",
+				"leave": "Покинути робочий простір",
+				"leaveHint": "Повернутися можна за новим запрошенням",
+				"leaveButton": "Покинути",
+				"delete": "Видалити робочий простір",
+				"deleteHint": "Видаляє всі проєкти та завдання в ньому"
+			},
+			"confirm": {
+				"deleteTitle": "Видалити робочий простір?",
+				"leaveTitle": "Покинути робочий простір?",
+				"deleteMessage": "Усі проєкти, завдання й коментарі в {{name}} буде видалено назавжди.",
+				"leaveMessage": "Ви втратите доступ, доки вас знову не запросять."
+			},
+			"toast": {
+				"updated": "Робочий простір оновлено",
+				"deleted": "Робочий простір видалено",
+				"left": "Ви покинули робочий простір"
+			}
+		},
+		"members": {
+			"title": "Учасники",
+			"description_one": "{{count}} людина в {{name}}",
+			"description_few": "{{count}} людини в {{name}}",
+			"description_many": "{{count}} людей у {{name}}",
+			"description_other": "{{count}} людини в {{name}}",
+			"thisWorkspace": "цьому робочому просторі",
+			"invite": "Запросити",
+			"pending": {
+				"title": "Запрошення, що очікують",
+				"expires": "{{role}}, діє до {{date}}",
+				"manage": "Керувати"
+			},
+			"people": {
+				"title": "Люди",
+				"unknown": "Невідомо",
+				"you": "(ви)"
+			},
+			"memberMenu": {
+				"fallbackTitle": "Учасник",
+				"changeRole": "Змінити роль",
+				"remove": "Видалити з робочого простору"
+			},
+			"rolePicker": {
+				"title": "Роль"
+			},
+			"remove": {
+				"title": "Видалити учасника?",
+				"message": "{{name}} втратить доступ до даних у {{workspace}}.",
+				"they": "Учасник",
+				"confirm": "Видалити"
+			},
+			"inviteMenu": {
+				"fallbackTitle": "Запрошення",
+				"resend": "Надіслати повторно",
+				"cancel": "Скасувати запрошення"
+			},
+			"inviteForm": {
+				"title": "Запросити учасника",
+				"intro": "Людина отримає лист із посиланням, щоб приєднатися до {{workspace}}.",
+				"email": "Електронна пошта",
+				"role": "Роль",
+				"send": "Надіслати запрошення"
+			},
+			"toast": {
+				"roleUpdated": "Роль оновлено",
+				"removed": "Учасника видалено",
+				"resent": "Запрошення надіслано повторно",
+				"canceled": "Запрошення скасовано",
+				"sent": "Запрошення надіслано на {{email}}"
+			}
+		},
+		"labels": {
+			"title": "Мітки",
+			"description": "Мітки допомагають групувати й фільтрувати завдання.",
+			"new": "Нова мітка",
+			"edit": "Редагувати мітку",
+			"delete": "Видалити мітку",
+			"fallbackTitle": "Мітка",
+			"empty": {
+				"title": "Немає міток",
+				"message": "Створюйте мітки, щоб групувати й фільтрувати завдання в усіх проєктах."
+			},
+			"actions": "Дії для {{name}}",
+			"deleteTitle": "Видалити «{{name}}»?",
+			"deleteMessage": "Мітку буде видалено з усіх завдань цього робочого простору.",
+			"form": {
+				"name": "Назва",
+				"color": "Колір"
+			},
+			"toast": {
+				"deleted": "Мітку видалено"
+			}
+		},
+		"permissions": {
+			"photos": "Kaneo використовує ваші фото, щоб додавати зображення до завдань і коментарів, а також для фото профілю."
 		}
 	}
 }
